@@ -9,7 +9,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'archive/legacy-project'
 ID = 'x6810_raw12mp'
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 VENDOR = 'system/vendor/lib64/'
 META = VENDOR + 'libmtkcam_metastore.so'
 POLICY = VENDOR + 'libmtkcam_pipelinepolicy.so'
@@ -48,11 +48,12 @@ def accepted_states(flavor: str) -> list[dict[str, str]]:
     raw = {p: digest(b) for p, b in payload('raw').items()}
     flash = {p: digest(b) for p, b in payload('raw-flash').items()}
     torch = json.loads((LEGACY / 'modules/v000_x6810_GL_raw_hd48_12mp_torch_changes/payload-sha256.json').read_text())
+    raw12 = json.loads((LEGACY / 'archive/modules/x6810_raw_v012/payload-sha256.json').read_text())
     if flavor == 'raw':
         raw11 = json.loads((LEGACY / 'archive/modules/x6810_raw_v011/payload-sha256.json').read_text())
-        return [{p: state[p] for p in raw} for state in (STOCK, {**STOCK, **raw11}, raw, torch, flash)]
+        return [{p: state[p] for p in raw} for state in (STOCK, {**STOCK, **raw11}, raw12, raw, torch, flash)]
     # Each row is a complete coherent tuple; mixed independent hashes are rejected.
-    return [STOCK, {**STOCK, **raw}, torch, flash]
+    return [STOCK, {**STOCK, **raw12}, {**STOCK, **raw}, torch, flash]
 
 def installer(flavor: str, hashes: dict[str, str]) -> str:
     text = '''#!/system/bin/sh
@@ -107,17 +108,23 @@ for script in post-fs-data.sh service.sh boot-completed.sh; do set_perm "$MODPAT
 def module_files(flavor: str) -> dict[str, bytes]:
     files = payload(flavor)
     hashes = {p: digest(b) for p, b in files.items()}
-    description = ('RAW16 on three sensors plus telephoto OIS OFF/ON; vendor-only, Android 11+ with known binaries.'
-                   if flavor == 'raw' else 'RAW/HD48 plus TORCH/SINGLE bridge; exact Android 16 GSI framework profile.')
-    files['module.prop'] = (f'id={ID}\nname=X6810 {flavor}\nversion={VERSION}\nversionCode=10000\nauthor=SRE-0\ndescription={description}\n').encode()
+    description = ('RAW16, processed JPEG HD48 and telephoto OIS; vendor-only, Android 11+ with known binaries.'
+                   if flavor == 'raw' else 'RAW/OIS/HD48 plus TORCH/SINGLE bridge; exact Android 16 GSI framework profile.')
+    files['module.prop'] = (f'id={ID}\nname=X6810 {flavor}\nversion={VERSION}\nversionCode=10100\nauthor=SRE-0\ndescription={description}\n').encode()
     files['customize.sh'] = installer(flavor, hashes).encode()
     files['payload-sha256.json'] = (json.dumps(hashes, indent=2)+'\n').encode()
     files['compatibility.json'] = (json.dumps({'flavor': flavor, 'min_sdk': 30 if flavor == 'raw' else 36,
-        'exact_sdk': None if flavor == 'raw' else 36, 'accepted_binary_sets': accepted_states(flavor),
+        'exact_sdk': None if flavor == 'raw' else 36,
+        'public_feature_min_sdk': 30 if flavor == 'raw' else 35,
+        'ois_validation': 'Owner confirms working telephoto OIS on Android 16 GSI; no new device test in this revision',
+        'accepted_binary_sets': accepted_states(flavor),
         'hardware_validation': 'Historical Android 16 GSI only; new packaging not device-tested'}, indent=2)+'\n').encode()
     files['README.md'] = (f'# X6810 {flavor}\n\n{description}\n\n'
         'Install through APatch; same ID for both variants. Switch by updating and rebooting. '
         'Disable/remove the module and reboot to recover. Backups contain the previous visible overlay, not necessarily stock.\n\n'
+        'Any compatible external GCam can be installed; the GCam system module is optional. '
+        'The owner confirms working telephoto OIS and BSG V32 with the recommended V32 XML on Android 16 GSI. '
+        'Processed HD48 JPEG does not mean native 48MP RAW.\n\n'
         'Docs: https://github.com/SRE-0/infinix_x6810_raw\n'
         'GCam: https://github.com/SRE-0/infinix_x6810_gcam_port\n').encode()
     files['system.prop'] = b'vendor.camera.tran.nums=3\n'

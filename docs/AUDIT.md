@@ -30,8 +30,8 @@ históricas se conservan deliberadamente para reproducir cada ensayo; los releas
 nuevos generan sus árboles desde entradas fijadas y una sola implementación.
 No se deduplicaron los archivos de datos privados ni se borraron investigaciones.
 
-Queda por validar: empaquetado 1.0.0 en hardware, Android 11 real, otras versiones
-GSI/framework, eficacia óptica OIS y calibración de intensidad flash. Las pruebas
+Queda por validar: empaquetado 1.1.0 en hardware, Android 11 real, otras versiones
+GSI/framework, calibración óptica cuantitativa OIS y calibración de intensidad flash. Las pruebas
 offline verifican política y bytes; no sustituyen esas mediciones.
 
 La estructura histórica conserva rutas relativas e imports. Los antiguos scripts
@@ -40,3 +40,7 @@ comandos mantenidos y [el repositorio GCam](https://github.com/SRE-0/infinix_x68
 No se ejecutaron tareas móviles ARTEMIS ni se conectó ADB al dispositivo, conforme a la instrucción
 del usuario. Datos locales de `research/`, `.local-private/` y `dist/` no entran
 en el inventario ni en la publicación.
+
+Actualización: el propietario confirma funcionamiento correcto de OIS y GCam
+V32 con su XML. RAW 1.1.0 añade el delta HD48 vendor-only; la revisión del ELF
+flash confirma API 36 de compilación, frente al mínimo público API 35.

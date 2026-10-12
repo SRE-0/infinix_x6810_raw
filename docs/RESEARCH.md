@@ -16,6 +16,11 @@ a instrucciones vigentes de release; consulta [desarrollo](DEVELOPMENT.md).
 [Archivo original](../archive/legacy-project/README.md) ·
 [Inventario y grupos por contenido](inventory.json).
 
+Actualización del 12 de octubre de 2026: el propietario confirma que OIS del
+teleobjetivo funciona correctamente y que GCam V32 funciona perfectamente con
+su perfil recomendado. Esa confirmación actualiza el estado provisional del
+informe OIS histórico; consulta [compatibilidad vigente](COMPATIBILITY.md).
+
 Los scripts históricos conservan imports y la estructura relativa original en
 `archive/legacy-project/`. Las herramientas GCam se trasladaron al otro repo:
 los scripts de releases combinados quedan retirados y no son comandos públicos.

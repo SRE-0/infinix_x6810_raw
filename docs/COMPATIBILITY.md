@@ -1,40 +1,73 @@
-# Compatibilidad
+# Compatibilidad: SDK público, vendor y framework
 
-La versión de Android y la familia de binarios son requisitos separados.
-El mismo X6810-GL puede tener un vendor diferente tras una actualización OEM.
-Una GSI puede conservar el vendor original y cambiar `cameraserver`.
-
-| Aspecto | RAW + OIS (`raw`) | RAW + OIS + flash (`raw-flash`) |
+| Requisito | RAW + OIS + HD48 (`raw`) | RAW + OIS + HD48 + flash (`raw-flash`) |
 |---|---|---|
-| SDK mínimo | 30 (Android 11); sin techo artificial | Perfil actual: exactamente 36 |
+| SDK mínimo del paquete actual | 30 / Android 11 | 36 / Android 16 GSI del perfil exacto |
+| SDK mínimo de las funciones de flash | No añade intensidad flash | TORCH: 33; SINGLE estándar: 35 |
 | Framework reemplazado | Ninguno | `system/bin/cameraserver` |
-| Bibliotecas | metastore, pipelinepolicy, HAL3A | Las anteriores y device3 HAL |
-| Dependencia OIS | SHA-256 del `libtran_oismgr.so` original | La misma |
-| Pruebas reales disponibles | Revisiones históricas en Android 16 GSI | Revisiones históricas en Android 16 GSI |
-| Empaquetado 1.0.0 | Verificación local; pendiente de prueba real | Verificación local; pendiente de prueba real |
-| Android 11–15 o 17+ | Admitido por SDK si coincide el vendor; no validado | Sin perfil de framework; rechazado |
+| Bibliotecas vendor | metastore, pipelinepolicy, HAL3A | Las anteriores y device3 HAL |
+| Gestor OIS | Hash original de `libtran_oismgr.so` | El mismo |
+| OIS | Probado y funcionando, confirmado por el propietario | El mismo puente OIS probado |
+| Android 11–15 o 17+ | Admitido por SDK con vendor conocido; sin prueba real de esas versiones | Sin perfil compatible: rechazado |
 
-El instalador verifica conjuntos coherentes de hashes, integridad de payloads,
-ARM64 y conflictos activos/pendientes antes del respaldo. No utiliza una lista
-independiente de hashes que pueda admitir una mezcla incompatible.
+La evidencia real corresponde a Android 16 GSI. El funcionamiento de OIS y de
+GCam V32 con el XML recomendado está confirmado por el propietario el 12 de
+octubre de 2026. No se ejecutaron nuevas pruebas móviles durante este cambio;
+el empaquetado 1.1.0 se valida localmente. Una GSI puede conservar el vendor OEM
+y sustituir el framework; el fingerprint del vendor Android 11 citado en un
+informe antiguo no prueba que el sistema activo fuera Android 11.
 
-RAW usa la base v0.12: RAW16, reprocesado/frontal binned, mínimo de seis buffers
-RAW y puente OIS. No incluye las modificaciones de flash ni el framework de una
-GSI. Las APIs Camera2 usadas por el puente OIS ya existen antes de Android 11.
-Eso reduce dependencias; no constituye una garantía de ABI o funcionamiento en
-todas las ROM futuras. No se han obtenido los binarios de un teléfono con Android
-11 en esta sesión. Un hash desconocido exige analizar/reconstruir su perfil y
-validarlo; quitar la comprobación de SDK o SHA-256 no es un port.
+## HD48 en RAW desde Android 11
 
-El control de intensidad TORCH estándar apareció en API 33:
-[CameraManager](https://developer.android.com/reference/android/hardware/camera2/CameraManager#turnOnTorchWithStrengthLevel(java.lang.String,int)).
-`FLASH_STRENGTH_LEVEL` apareció en API 35:
-[CaptureRequest](https://developer.android.com/reference/android/hardware/camera2/CaptureRequest#FLASH_STRENGTH_LEVEL).
-Estos mínimos del SDK no prueban compatibilidad del parche binario actual.
-SINGLE conserva el transporte privado Transsion descrito en el informe histórico;
-no se afirma que toda app Camera2 use automáticamente el puente.
+RAW conserva la base v0.12 (RAW16, frontal binned, buffers y OIS) y aplica sólo el
+delta HD48 verificado: JPEG/YUV 4000×3000 y JPEG 8000×6000 en el metastore.
+Es metadata del vendor; no añade hooks de flash, un framework nuevo ni una API
+posterior a Android 11. La enumeración Camera2 de tamaños de alta resolución
+existe desde API 23:
+[StreamConfigurationMap](https://developer.android.com/reference/android/hardware/camera2/params/StreamConfigurationMap#getHighResolutionOutputSizes(int)).
+Por eso se mantiene mínimo API 30. La dependencia real sigue siendo el mismo
+vendor compatible, y Android 11 aún necesita una prueba real.
 
-OIS sólo se anuncia/controla en el teleobjetivo OV08A10 (Camera2 ID histórico 2,
-sensor vendor 4). No se añade OIS a la principal ni a la frontal. No se publica
-telemetría de posición OIS, ni se asegura mejora óptica o calibración CTS.
-TORCH 1–9 y SINGLE 1–30 son índices de duty, no lúmenes ni porcentajes.
+HD48 significa JPEG procesado de 8000×6000. La evidencia histórica muestra
+entrada física 4000×3000; no significa RAW nativo de 48 MP. Una app debe solicitar
+ese tamaño JPEG y consultar también `getHighResolutionOutputSizes()`. Instalar
+el módulo no hace que todas las GCam capturen JPEG HD48 automáticamente.
+
+## ¿Puede flash funcionar antes de Android 16?
+
+Sí, las funciones permiten desarrollar un port anterior: intensidad TORCH desde
+Android 13/API 33 y el conjunto TORCH + SINGLE estándar desde Android 15/API 35.
+[CameraManager, API 33](https://developer.android.com/sdk/api_diff/33/changes/android.hardware.camera2.CameraManager) ·
+[CaptureRequest, API 35](https://developer.android.com/sdk/api_diff/35/changes/android.hardware.camera2.CaptureRequest).
+El parche SINGLE actual lee `android.flash.strengthLevel` (`0x00040006`) y publica
+sus metadatos de máximo/default (`0x00040007`/`0x00040008`); luego los traduce al
+tag privado Transsion `0xc000008c`. No es exclusivamente un control privado que
+permita ignorar la API pública 35.
+
+**El ZIP actual no se puede declarar compatible con Android 15.** Se inspeccionó
+su ELF: `.note.android.ident` contiene `0x24`, es decir API 36; tiene 62 dependencias
+compartidas y 1381 símbolos dinámicos externos. Incluye bibliotecas privadas de
+CameraService/Binder y flags del framework. Sus hooks también usan offsets y
+estructuras de esa compilación concreta. Bajar el SDK del instalador no adapta
+esas dependencias ni transportes. Véase [auditoría binaria](FLASH_COMPATIBILITY.md).
+
+Por tanto: **35 es el mínimo público para portar todas las funciones de flash;
+36 sigue siendo el mínimo del paquete binario disponible.** Para Android 15 hace
+falta su `cameraserver` original, reubicar/reconstruir los hooks, comprobar ABI y
+realizar pruebas de request/result y pulso. Para Android 13–14 se podría crear
+un port TORCH sin el SINGLE estándar. Este cambio no genera esos ports sin sus
+binarios originales ni instala un ejecutable API 36 sobre sistemas anteriores.
+
+## OIS y apps
+
+OIS está probado y funciona correctamente según confirma el propietario en el
+teleobjetivo OV08A10 (ID Camera2 histórico 2, sensor vendor 4). Se conservan las
+pruebas de OFF→ON→OFF, ioctls suspend/resume correctos y resultados ON en GCam.
+La confirmación funcional actualiza la conclusión provisional del informe
+histórico. No hay OIS añadido a principal/frontal ni telemetría de posición.
+No se afirma calibración óptica cuantitativa o certificación CTS.
+
+Puedes usar cualquier GCam externa compatible, sin instalar el módulo GCam de
+sistema. V32 y su perfil recomendado están comprobados por el propietario;
+otros ports no quedan automáticamente certificados. TORCH 1–9 y SINGLE 1–30
+son índices de duty, no lúmenes ni porcentajes.

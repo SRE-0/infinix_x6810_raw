@@ -95,6 +95,24 @@ def verify_installers():
     (parent / 'installers.json').write_text(json.dumps(rows, indent=2)+'\n', encoding='utf-8')
     return len(rows)
 
+def verify_raw_hd48():
+    """Ensure RAW gained only the HD48 delta while retaining the non-flash OIS HAL."""
+    source = LEGACY / 'archive/modules/x6810_raw_v012'
+    profile = module_files('raw')
+    manifest = json.loads((LEGACY / 'patches/v0122_x6810_raw_hd48_12mp/manifest.json').read_text())
+    before = (source / META).read_bytes()
+    require(digest(before) == manifest['input_sha256'], 'Unexpected RAW/OIS HD48 base')
+    after = bytearray(before)
+    for change in manifest['changes']:
+        offset = int(change['offset'], 16)
+        old, new = bytes.fromhex(change['old']), bytes.fromhex(change['new'])
+        require(before[offset:offset+len(old)] == old and len(old) == len(new), 'HD48 delta bytes')
+        after[offset:offset+len(new)] = new
+    require(bytes(after) == profile[META], 'RAW metastore contains changes beyond verified HD48')
+    for rel in (POLICY, 'system/vendor/lib64/libcam.hal3a.v3.so'):
+        require(profile[rel] == (source / rel).read_bytes(), 'RAW policy/OIS HAL must exclude flash changes')
+    require(SERVER not in profile, 'RAW HD48 must not replace framework')
+
 def run_case(temp, shell, variant, files, case, sdk=36, state=None):
     root = temp / variant / case
     mod, live, active, pending = (root / name for name in ('module', 'live', 'active', 'pending'))
@@ -165,6 +183,7 @@ def main():
     for p in (ROOT / 'scripts').glob('*.py'):
         ast.parse(p.read_text(encoding='utf-8'), filename=str(p))
     manifests = verify_manifests()
+    verify_raw_hd48()
     installers = verify_installers()
     print(f'PASS: {manifests} binary manifests reconstructed; {installers} isolated installer cases; deterministic ZIPs and permissions')
     print('Offline fixtures do not establish real-device/API compatibility.')

@@ -1,18 +1,17 @@
 # Entradas verificadas
 
-`raw/` contiene los tres ELF de v0.12 RAW + OIS, antes de las modificaciones de
-flash: metastore `a7f9…`, policy `d3bf…`, HAL3A `7aee…`.
+`raw/` conserva HAL3A `7aee…` y policy `d3bf…` de v0.12 RAW + OIS. El metastore
+`bafe…` resulta de aplicar únicamente el delta HD48 a su base OIS `a7f9…`.
 `raw-flash/` contiene los cinco ELF del release integrado v001, incluyendo
-HD48, OIS y puentes TORCH/SINGLE. `SHA256SUMS.json` fija cada ruta de instalación.
-El constructor comprueba estos hashes y ELF64 AArch64 antes de crear un ZIP.
-
-Procedencia y deltas completos:
+HD48, OIS y los puentes TORCH/SINGLE. SHA256SUMS.json fija sus rutas/hashes.
 
 - [RAW + OIS original](../archive/legacy-project/archive/modules/x6810_raw_v012/README.md)
-- [OIS](../archive/legacy-project/patches/v0.12-ois-trial/metadata-manifest.json)
+- [Delta HD48 aplicado a RAW](../archive/legacy-project/patches/v0122_x6810_raw_hd48_12mp/manifest.json)
+- [Metadata OIS](../archive/legacy-project/patches/v0.12-ois-trial/metadata-manifest.json)
 - [Control OIS](../archive/legacy-project/patches/v0.12-ois-trial/control-manifest.json)
 - [Flash integrado](../archive/legacy-project/modules/v001_x6810_GL_raw_hd48_12mp_torch_single_flash_apis_changes/README.md)
 
-RAW + OIS conserva las resoluciones RAW de la revisión v0.12. HD48 es una
-capacidad JPEG de la variante integrada y no se anuncia en esta variante RAW.
+RAW 1.1.0 anuncia JPEG 8000×6000 y JPEG/YUV 4000×3000 sin modificar flash ni
+reemplazar `cameraserver`. El delta opera en metadata existente: HD48 no requiere
+una API posterior a Android 11. Es JPEG procesado, no RAW nativo de 48 MP.
 No sustituyas ELF de otra ROM manteniendo el mismo manifest.
