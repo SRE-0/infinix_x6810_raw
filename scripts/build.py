@@ -116,17 +116,23 @@ def module_files(flavor: str) -> dict[str, bytes]:
     files['compatibility.json'] = (json.dumps({'flavor': flavor, 'min_sdk': 30 if flavor == 'raw' else 36,
         'exact_sdk': None if flavor == 'raw' else 36,
         'public_feature_min_sdk': 30 if flavor == 'raw' else 35,
-        'ois_validation': 'Owner confirms working telephoto OIS on Android 16 GSI; no new device test in this revision',
+        'ois_validation': 'Telephoto OIS tested and working on Android 16 GSI; no new device test in this revision',
         'accepted_binary_sets': accepted_states(flavor),
         'hardware_validation': 'Historical Android 16 GSI only; new packaging not device-tested'}, indent=2)+'\n').encode()
     files['README.md'] = (f'# X6810 {flavor}\n\n{description}\n\n'
         'Install through APatch; same ID for both variants. Switch by updating and rebooting. '
         'Disable/remove the module and reboot to recover. Backups contain the previous visible overlay, not necessarily stock.\n\n'
         'Any compatible external GCam can be installed; the GCam system module is optional. '
-        'The owner confirms working telephoto OIS and BSG V32 with the recommended V32 XML on Android 16 GSI. '
+        'Telephoto OIS and BSG V32 with the recommended V32 XML were tested and work correctly on Android 16 GSI. '
         'Processed HD48 JPEG does not mean native 48MP RAW.\n\n'
         'Docs: https://github.com/SRE-0/infinix_x6810_raw\n'
         'GCam: https://github.com/SRE-0/infinix_x6810_gcam_port\n').encode()
+    for notice in ('DISCLAIMER.md', 'THIRD_PARTY_NOTICES.md'):
+        files[notice] = (ROOT / notice).read_bytes()
+    files['docs/LEGAL.md'] = (ROOT / 'docs/LEGAL.md').read_bytes()
+    for notice in ('LEGAL.md', 'DISCLAIMER.md', 'THIRD_PARTY_NOTICES.md'):
+        files['docs/es/' + notice] = (ROOT / 'docs/es' / notice).read_bytes()
+    files['archive/legacy-project/vendor/mtkcam-raw/LICENSE'] = (LEGACY / 'vendor/mtkcam-raw/LICENSE').read_bytes()
     files['system.prop'] = b'vendor.camera.tran.nums=3\n'
     for name in ('post-fs-data.sh', 'boot-completed.sh'):
         files[name] = (ROOT / 'module/common' / name).read_bytes()

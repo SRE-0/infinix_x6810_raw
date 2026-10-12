@@ -1,8 +1,8 @@
-# Arquitectura y construcción
+**English** | [Español](es/DEVELOPMENT.md)
 
-Requisitos: Python 3.11+; POSIX `sh` para validar instaladores (Git Bash en Windows).
-La construcción usa sólo la biblioteca estándar. Los analizadores históricos
-tienen sus propios requisitos, conservados dentro del archivo.
+# Architecture and builds
+
+Python 3.11+ is required. Building uses only the standard library; installer validation also needs POSIX `sh` (Git Bash on Windows). Historical analyzers retain their own dependencies.
 
 ```sh
 git lfs install
@@ -11,36 +11,20 @@ python scripts/validate.py
 python scripts/build.py --variant all
 ```
 
-También puedes construir una sola variante con `--variant raw` o `--variant
-raw-flash`, y elegir el directorio con `--output`. Los manifests y checksums de
-ese directorio describen las variantes de la invocación actual; usa directorios
-distintos para construcciones parciales. Los ZIP tienen fechas/modos Unix fijos.
+Use `--variant raw` or `--variant raw-flash` for a single variant and `--output` for a separate destination. Each output manifest describes only that invocation; use separate directories for partial builds. ZIP timestamps and Unix modes are fixed.
 
-| Ruta | Responsabilidad |
+| Path | Responsibility |
 |---|---|
-| `scripts/build.py` | Constructor único: perfiles, admisión por SHA, metadata, servicios y ZIP |
-| `scripts/validate.py` | ELF/hashes, reconstrucción/reversión de manifests, fixtures del instalador y ZIP |
-| `module/common/` | Ciclo de boot, registro y entrada de instalación |
-| `payloads/raw/` | Tres ELF: v0.12 RAW + OIS y delta HD48; hashes inmutables |
-| `payloads/raw-flash/` | Cinco ELF v001: RAW + OIS + flash/HD48 |
-| `archive/legacy-project/` | Fuentes de parches, originales, versiones e informes históricos |
-| `dist/` | Paquetes y resultados generados, ignorados por Git |
+| `scripts/build.py` | Single builder: profiles, hash admission, metadata, services, ZIP |
+| `scripts/validate.py` | ELF/hash checks, manifest reconstruction/reversal, isolated installer cases, ZIP checks |
+| `module/common/` | Boot lifecycle and installer entry point |
+| `payloads/raw/` | Three pinned vendor ELF files: RAW/OIS plus HD48 metadata |
+| `payloads/raw-flash/` | Five pinned integrated vendor/framework ELF files |
+| `archive/legacy-project/` | Original patches, versions, reports and research |
+| `dist/` | Ignored build output |
 
-La validación reconstruye los deltas `old/new` de los manifiestos. Cuando falta
-la entrada original pero se conserva la salida, primero revierte y comprueba el
-hash de entrada. Los fixtures simulan propiedades/hashes del firmware y rutas
-de módulos; usan hashes reales para el payload y verifican respaldo, rechazo de
-mezclas/conflictos, API, corrupción y permisos ZIP. No acceden a ADB ni prueban
-la funcionalidad física de la cámara.
+Validation reconstructs `old/new` manifest deltas, reversing preserved outputs when needed to verify input hashes. Installer fixtures simulate firmware properties, real payload hashes and module paths; they check backups, mixed states, conflicts, SDK gates, corruption and archive permissions. They do not exercise a camera or connect to ADB.
 
-Procedencia RAW: `archive/legacy-project/archive/modules/x6810_raw_v012` más
-el delta `archive/legacy-project/patches/v0122_x6810_raw_hd48_12mp/manifest.json`.
-HAL3A y policy siguen siendo los de RAW + OIS sin modificaciones de flash.
-Procedencia flash: `archive/legacy-project/modules/v001_x6810_GL_raw_hd48_12mp_torch_single_flash_apis_changes`.
-Los bytes se preservan; el refactor cambia empaquetado y política de instalación.
-Las fuentes AArch64 y verificadores avanzados permanecen en el archivo para
-reproducir offsets y emulación. No se reescribieron sus algoritmos de imagen.
+RAW provenance: `archive/legacy-project/archive/modules/x6810_raw_v012` plus `archive/legacy-project/patches/v0122_x6810_raw_hd48_12mp/manifest.json`. HAL3A and policy retain the flash-free RAW/OIS bytes. Flash provenance: `archive/legacy-project/modules/v001_x6810_GL_raw_hd48_12mp_torch_single_flash_apis_changes`.
 
-Para un nuevo firmware añade un perfil derivado de sus ELF originales, deltas
-verificados y evidencia de capture/preview/OIS/flash. Un número SDK nuevo por sí
-solo no autoriza un `cameraserver` antiguo.
+A new firmware profile needs original ELF files, verified deltas and capture/preview/OIS/flash evidence. An SDK number alone does not authorize an older cameraserver. [Licensing and redistribution review](LEGAL.md).

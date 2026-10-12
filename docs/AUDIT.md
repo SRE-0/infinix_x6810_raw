@@ -1,46 +1,13 @@
-# Auditoría y reorganización — 12 de octubre de 2026
+**English** | [Español](es/AUDIT.md)
 
-Se examinó el árbol público completo: 752 archivos originales
-(1251.7 MiB, incluidos paquetes GCam locales).
-Se verificó la preservación byte a byte mediante SHA-256 antes y después de la
-migración. El inventario excluye rutas personales y contenido privado.
+# Organization audit — 2026-10-12
 
-Problemas encontrados: 131 archivos directos de herramientas/scripts públicos,
-20 directorios de módulos históricos, dos árboles de release completos, documentación bilingüe
-duplicada y releases RAW/GCam acoplados al APK de Downloads. El instalador RAW
-actual exigía SDK 36 y reemplazaba un framework de una GSI concreta. Los ensayos
-GCam 0.5.0 y el release original firmado 0.7.0 coexistían y podían confundirse.
-Había un ZIP generado de más de 500 MiB junto a las fuentes del módulo.
+The original public tree contained 752 files, approximately 1251.7 MiB including local GCam packages. SHA-256 was checked during migration; [inventory](inventory.json) excludes private data and personal paths.
 
-Cambios realizados:
+The mixed tree contained 131 top-level tool/script files, 20 historical module directories, two complete release trees, repeated bilingual documentation and builders coupled to a personal Downloads path. GCam 0.5.0 modified-DEX experiments were easily confused with the original signed 0.7.0 system release.
 
-- Dos repositorios independientes con referencias cruzadas: RAW/OIS/flash y GCam.
-- Constructor RAW único y dos variantes fijadas por hash; RAW + OIS no reemplaza
-  framework ni incorpora el puente de intensidad flash.
-- RAW admite API 30+ con vendor/OIS conocidos; flash conserva un perfil SDK 36
-  exacto. No se declara soporte probado en Android 11 ni en versiones futuras.
-- Fuentes históricas agrupadas en un archivo, sin mezclarse con scripts activos.
-- README, compatibilidad, instalación, desarrollo y evidencia con una referencia
-  principal por tema; informes originales conservados como historia.
-- ZIP y APK experimental fuera de Git; binarios versionados mediante Git LFS.
-- CI y publicación RAW independientes de GCam y de Downloads del usuario.
+The maintained structure now has two independent repositories with cross-links, one RAW builder and two hash-pinned variants. RAW contains OIS and vendor-only HD48 without a framework replacement; flash keeps its exact API 36 profile. Original camera experiments remain grouped in `archive/legacy-project/` for reproducibility. Fifty-seven identical-content groups are recorded; their historical copies are retained intentionally, while new releases use canonical inputs and one implementation.
 
-El inventario registra 57 grupos con contenido idéntico. Las copias
-históricas se conservan deliberadamente para reproducir cada ensayo; los releases
-nuevos generan sus árboles desde entradas fijadas y una sola implementación.
-No se deduplicaron los archivos de datos privados ni se borraron investigaciones.
+English is the default documentation language with linked Spanish editions. GCam decompilation is local-only; its standalone instrumentation files were removed from tracked history, with project-authored generators retained as tools. The signed APK actually packaged by its current module is retained through Git LFS.
 
-Queda por validar: empaquetado 1.1.0 en hardware, Android 11 real, otras versiones
-GSI/framework, calibración óptica cuantitativa OIS y calibración de intensidad flash. Las pruebas
-offline verifican política y bytes; no sustituyen esas mediciones.
-
-La estructura histórica conserva rutas relativas e imports. Los antiguos scripts
-de releases combinados y enlaces a GCam son referencias retiradas; usa los dos
-comandos mantenidos y [el repositorio GCam](https://github.com/SRE-0/infinix_x6810_gcam_port).
-No se ejecutaron tareas móviles ARTEMIS ni se conectó ADB al dispositivo, conforme a la instrucción
-del usuario. Datos locales de `research/`, `.local-private/` y `dist/` no entran
-en el inventario ni en la publicación.
-
-Actualización: el propietario confirma funcionamiento correcto de OIS y GCam
-V32 con su XML. RAW 1.1.0 añade el delta HD48 vendor-only; la revisión del ELF
-flash confirma API 36 de compilación, frente al mínimo público API 35.
+OIS and BSG V32 with the recommended XML were tested and work correctly on Android 16 GSI. Outstanding validation includes the reorganized packaging on hardware, Android 11, other frameworks and quantitative optical/flash calibration. Offline verification does not replace those measurements. No new mobile testing was performed during this documentation revision.

@@ -1,21 +1,11 @@
-# GCam externa
+**English** | [Español](es/GCAM.md)
 
-El módulo RAW/OIS/HD48, y su variante flash, no instalan ni exigen una GCam
-concreta. Puedes instalar cualquier GCam externa como APK de usuario, siempre
-que ese port admita tu Android y HAL. El instalador GCam de sistema del otro
-repo es opcional y está fijado a una APK; esa restricción no pertenece al módulo
-de cámara. No uses ese instalador fijo para empaquetar otra GCam.
+# External GCam
 
-El propietario confirma que
-[MGC_9.7.047_V32_MGC.apk](https://1-dontsharethislink.celsoazevedo.com/file/filesc/MGC_9.7.047_V32_MGC.apk)
-(`com.android.MGC_9_7_047`) funciona perfectamente en su X6810-GL Android 16 GSI
-con [x6810-gcam-bsg-9.7-v32-recommended.xml](https://github.com/SRE-0/infinix_x6810_gcam_port/blob/main/profiles/x6810-gcam-bsg-9.7-v32-recommended.xml).
-La guía de carga y descripción de las 755 preferencias está en
-[el proyecto GCam](https://github.com/SRE-0/infinix_x6810_gcam_port/blob/main/profiles/README.md).
-OIS del teleobjetivo también está probado y funciona correctamente; el perfil
-incluye `camera.ois_forced_photo_mode=true`.
+You can install any compatible external GCam as a normal app. RAW/OIS/HD48 and flash operate at the Camera2/vendor layer and do not require a specific APK or the optional GCam system module. Compatibility still depends on the port and Android version.
 
-El perfil habilita la disponibilidad de RAW, pero guarda
-`pref_camera_raw_output_key=0`: no activa automáticamente guardar DNG. Activa
-la salida RAW en la app si deseas archivos DNG. JPEG HD48 tampoco se impone a
-GCam: el port debe elegir ese stream Camera2.
+[BSG MGC_9.7.047_V32_MGC.apk](https://1-dontsharethislink.celsoazevedo.com/file/filesc/MGC_9.7.047_V32_MGC.apk), package `com.android.MGC_9_7_047`, was tested and works perfectly with [the recommended X6810 V32 profile](https://github.com/SRE-0/infinix_x6810_gcam_port/blob/main/profiles/x6810-gcam-bsg-9.7-v32-recommended.xml) on Android 16 GSI. Telephoto OIS was tested and works correctly.
+
+Export your current BSG config, then import the recommended XML using `Load config`. See the [profile guide](https://github.com/SRE-0/infinix_x6810_gcam_port/blob/main/profiles/README.md). DNG saving is disabled in the supplied snapshot (`pref_camera_raw_output_key=0`); enable it in the app if needed. The profile enables photo OIS but does not force every port to request HD48 JPEG or provide 48 MP RAW.
+
+The optional system module uses the exact original signed V32 APK with a separate native cache-library replacement. It is maintained in [infinix_x6810_gcam_port](https://github.com/SRE-0/infinix_x6810_gcam_port), not bundled into either RAW ZIP.

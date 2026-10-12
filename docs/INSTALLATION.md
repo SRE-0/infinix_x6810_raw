@@ -1,32 +1,15 @@
-# Instalación y recuperación
+**English** | [Español](es/INSTALLATION.md)
 
-1. Genera los paquetes con `python scripts/build.py` o descarga un release del
-   repositorio RAW y comprueba su `SHA256SUMS.txt`.
-2. Guarda un método de acceso a recovery/root antes de cambiar bibliotecas de
-   cámara. No instales si el instalador rechaza el firmware.
-3. Elige `x6810-raw-1.1.0.zip` (RAW + OIS + JPEG HD48) o
-   `x6810-raw-flash-1.1.0.zip` (RAW + OIS + flash) e instálalo desde APatch.
-4. Reinicia. Comprueba apertura de la cámara OEM, preview/captura de los tres
-   sensores y DNG en una app que solicite RAW. El boot exitoso no prueba captura.
-5. Para OIS usa una app que solicite `LENS_OPTICAL_STABILIZATION_MODE=ON` en el
-   teleobjetivo. OIS está probado y funciona correctamente, confirmado por el
-   propietario. El módulo no modifica preferencias de GCam; el perfil recomendado
-   V32 del otro proyecto activa la solicitud OIS para fotografía.
+# Installation and recovery
 
-Para cambiar de variante instala el otro ZIP sobre el mismo ID y reinicia.
-El gestor debe reemplazar el árbol del módulo: RAW no puede conservar el
-`system/bin/cameraserver` de la variante flash. Los fixtures locales verifican
-la admisión de ambos conjuntos de binarios; el cambio real sigue pendiente.
+1. Build with `python scripts/build.py`, or obtain a project release and verify `SHA256SUMS.txt`.
+2. Keep a working root/recovery route before changing camera libraries. Stop if the installer rejects the firmware.
+3. Install one variant through APatch: `x6810-raw-1.1.0.zip` for RAW/OIS/HD48, or `x6810-raw-flash-1.1.0.zip` for the exact Android 16 flash profile.
+4. Reboot. Check the OEM camera, preview and capture on all three sensors, and DNG in an app that requests RAW. Boot success alone does not establish camera functionality.
+5. Request `LENS_OPTICAL_STABILIZATION_MODE=ON` on the telephoto sensor. OIS was tested and works correctly on Android 16 GSI. The module does not change app settings; the separate recommended BSG V32 XML enables photo OIS.
 
-Para deshacer, desactiva/elimina `x6810_raw12mp` en el gestor y reinicia. Si no
-puedes iniciar Android, desde recovery/root crea
-`/data/adb/modules/x6810_raw12mp/disable` y reinicia. No copies el respaldo a
-la partición vendor: contiene la biblioteca visible anterior, que puede ser
-otro overlay. El contador de dos boots incompletos es una ayuda de recuperación;
-puede tardar otro arranque en surtir efecto y no garantiza evitar un bootloop.
+Both variants share `id=x6810_raw12mp`. Switch by installing the other ZIP and rebooting. The manager must replace the complete module tree, so RAW does not retain the flash cameraserver. Offline fixtures cover accepted binary tuples; the repackaged variant switch has not been exercised on a phone.
 
-Antes de volver a stock, desactiva cualquier flag de GCam que fuerce OIS para
-evitar solicitudes incompatibles con la metadata original.
-Puedes instalar cualquier GCam externa compatible. V32 y sus ajustes recomendados
-funcionan perfectamente según confirma el propietario. Consulta [GCam externa](GCAM.md).
-GCam se instala por separado: [repositorio y guía](https://github.com/SRE-0/infinix_x6810_gcam_port).
+To undo, disable/remove `x6810_raw12mp` and reboot. From recovery/root, create `/data/adb/modules/x6810_raw12mp/disable` if Android cannot boot. Do not copy backups onto vendor: they contain the previous visible library, which may itself be an overlay. The two-incomplete-boot counter is a recovery aid, may take an additional boot to act, and does not guarantee bootloop prevention.
+
+Before returning to stock, turn off GCam settings that force OIS. [External GCam and recommended V32 settings](GCAM.md). The GCam system module is installed separately.
