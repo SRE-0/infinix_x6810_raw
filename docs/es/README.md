@@ -15,7 +15,7 @@
   <img src="https://img.shields.io/badge/APatch-systemless-73daca?style=for-the-badge&labelColor=1a1b26" alt="APatch systemless">
 </p>
 
-<p align="center">[English](../../README.md) · **Español**</p>
+<p align="center"><a href="../../README.md">English</a> &middot; <strong>Espa&#241;ol</strong></p>
 
 ## Módulos de cámara
 
