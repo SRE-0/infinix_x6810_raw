@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 main-full12-trial-v012
+version=0.12.1-main-full12-trial-v012
+versionCode=12
+author=SRE-0
+description=Experimental main resolution streams with v0.12 OIS preserved; hardware untested.

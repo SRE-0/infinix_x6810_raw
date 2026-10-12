@@ -1,0 +1,35 @@
+# Private device data and local-only research
+.local-private/
+local-data/
+research/
+
+# Generated packages, analyses, and verification output
+dist/
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Device captures and logs
+*.dng
+*.log
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp4
+*.mov
+*.zip
+*.tgz
+*.tar.gz
+window-*.xml
+
+# Editor/OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

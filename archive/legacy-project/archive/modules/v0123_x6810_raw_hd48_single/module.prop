@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=v0123_x6810_raw_hd48_single
+version=v0123_x6810_raw_hd48_single
+versionCode=16
+author=SRE-0
+description=Main Camera2 SINGLE strength 1..30 to AW36515 duty 0..29; bounded 300ms timeout; preserves HD48, RAW/OIS and torch 0..8.

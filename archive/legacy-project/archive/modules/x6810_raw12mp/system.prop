@@ -1,0 +1,15 @@
+# Forzar el número de cámaras a 3 (crítico)
+vendor.camera.tran.nums=3
+
+# Propiedades opcionales para mejorar la estabilidad y habilitar funciones
+ro.odm.camera=1
+
+# Propiedades de rendimiento del módulo original que sí son útiles
+ro.media.enc.hprof.vid.bps=8000000
+ro.camcorder.videoModes=true
+
+persist.camera.HAL3.enabled=1
+persist.vendor.camera.HAL3.enabled=1
+
+# Forzar soporte de metadatos extendidos de Transsion
+persist.vendor.camera.ultra_pixel=1

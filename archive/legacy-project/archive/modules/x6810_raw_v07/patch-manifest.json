@@ -1,0 +1,228 @@
+{
+  "profile": "x6810-hi1631q-binned-normalization-v0.7-experimental",
+  "input_sha256": "dbd740c5c7ba3081fb9d38b68b2f9975e19d6faad41dd5f87ce75f3c7d7be485",
+  "output_sha256": "2b3bca8dfa83ea01c3f210b1b187c173a453665f3373afe9e8d17614b0fe95df",
+  "size": 784232,
+  "changed_bytes": 590,
+  "cave_start": "0xbc530",
+  "cave_end": "0xbc7a8",
+  "targets": [
+    {
+      "sensor": "S5KGM1ST_MIPI_RAW",
+      "symbol": "constructCustStaticMetadata_PLATFORM_PROJECT_SENSOR_DRVNAME_S5KGM1ST_MIPI_RAW",
+      "constructor": "0x54760",
+      "raw_stream": [
+        32,
+        4000,
+        3000,
+        0,
+        50000000,
+        33333333
+      ],
+      "status": "main; functional RAW reported by owner with v0.1",
+      "capabilities_before": [
+        0,
+        1,
+        2,
+        5,
+        6,
+        7,
+        4
+      ],
+      "hooks": [
+        {
+          "offset": "0x5482c",
+          "destination": "0xbc530",
+          "helper": "0xbbbd0",
+          "trampoline_size": 40
+        },
+        {
+          "offset": "0x54c4c",
+          "destination": "0xbc558",
+          "helper": "0xbbcb0",
+          "trampoline_size": 148
+        }
+      ],
+      "capabilities_after": [
+        0,
+        1,
+        2,
+        5,
+        6,
+        7,
+        4,
+        3
+      ]
+    },
+    {
+      "sensor": "OV08A10_MIPI_RAW",
+      "symbol": "constructCustStaticMetadata_PLATFORM_PROJECT_SENSOR_DRVNAME_OV08A10_MIPI_RAW",
+      "constructor": "0x30338",
+      "raw_stream": [
+        32,
+        3264,
+        2448,
+        0,
+        33333333,
+        33333333
+      ],
+      "status": "telephoto; functional RAW reported by owner with v0.2",
+      "capabilities_before": [
+        0,
+        1,
+        2,
+        5,
+        6,
+        4,
+        7
+      ],
+      "hooks": [
+        {
+          "offset": "0x303fc",
+          "destination": "0xbc5ec",
+          "helper": "0xbbbd0",
+          "trampoline_size": 40
+        },
+        {
+          "offset": "0x305b8",
+          "destination": "0xbc614",
+          "helper": "0xbbcb0",
+          "trampoline_size": 148
+        }
+      ],
+      "capabilities_after": [
+        0,
+        1,
+        2,
+        5,
+        6,
+        4,
+        7,
+        3
+      ]
+    },
+    {
+      "sensor": "HI1631Q_MIPI_RAW",
+      "symbol": "constructCustStaticMetadata_PLATFORM_PROJECT_SENSOR_DRVNAME_HI1631Q_MIPI_RAW",
+      "constructor": "0x4e1c8",
+      "raw_stream": [
+        32,
+        2320,
+        1744,
+        0,
+        33333333,
+        33333333
+      ],
+      "status": "Experimental binned-only; hardware validation pending",
+      "capabilities_before": [
+        0,
+        1,
+        2,
+        5,
+        6
+      ],
+      "hooks": [
+        {
+          "offset": "0x4e26c",
+          "destination": "0xbc6a8",
+          "helper": "0xbbbd0",
+          "trampoline_size": 40
+        },
+        {
+          "offset": "0x4e688",
+          "destination": "0xbc6d0",
+          "helper": "0xbbcb0",
+          "trampoline_size": 148
+        }
+      ],
+      "capabilities_after": [
+        0,
+        1,
+        2,
+        5,
+        6,
+        3
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "offset": "0x5482c",
+      "old": "e99c0194",
+      "new": "419f0194",
+      "reason": "S5KGM1ST_MIPI_RAW: append RAW capability"
+    },
+    {
+      "offset": "0x54c4c",
+      "old": "199c0194",
+      "new": "439e0194",
+      "reason": "S5KGM1ST_MIPI_RAW: append RAW16 tuple"
+    },
+    {
+      "offset": "0x303fc",
+      "old": "f52d0294",
+      "new": "7c300294",
+      "reason": "OV08A10_MIPI_RAW: append RAW capability"
+    },
+    {
+      "offset": "0x305b8",
+      "old": "be2d0294",
+      "new": "17300294",
+      "reason": "OV08A10_MIPI_RAW: append RAW16 tuple"
+    },
+    {
+      "offset": "0x4e26c",
+      "old": "59b60194",
+      "new": "0fb90194",
+      "reason": "HI1631Q_MIPI_RAW: append RAW capability"
+    },
+    {
+      "offset": "0x4e688",
+      "old": "8ab50194",
+      "new": "12b80194",
+      "reason": "HI1631Q_MIPI_RAW: append RAW16 tuple"
+    },
+    {
+      "offset": "0xbc530",
+      "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "f37bbea9f30300aaa6fdff9768008052e8430039e00313aae1430091a1fdff97f37bc2a8c0035fd6f37bbea9f30300aad4fdff9708048052e80b00f9e00313aae1430091cffdff9708f48152e80b00f9e00313aae1430091cafdff9708778152e80b00f9e00313aae1430091c5fdff9708008052e80b00f9e00313aae1430091c0fdff9708109e52485fa072e80b00f9e00313aae1430091bafdff97a80a9452883fa072e80b00f9e00313aae1430091b4fdff97f37bc2a8c0035fd6f37bbea9f30300aa77fdff9768008052e8430039e00313aae143009172fdff97f37bc2a8c0035fd6f37bbea9f30300aaa5fdff9708048052e80b00f9e00313aae1430091a0fdff9708988152e80b00f9e00313aae14300919bfdff9708328152e80b00f9e00313aae143009196fdff9708008052e80b00f9e00313aae143009191fdff97a80a9452883fa072e80b00f9e00313aae14300918bfdff97a80a9452883fa072e80b00f9e00313aae143009185fdff97f37bc2a8c0035fd6f37bbea9f30300aa48fdff9768008052e8430039e00313aae143009143fdff97f37bc2a8c0035fd6f37bbea9f30300aa76fdff9708048052e80b00f9e00313aae143009171fdff9708228152e80b00f9e00313aae14300916cfdff9708da8052e80b00f9e00313aae143009167fdff9708008052e80b00f9e00313aae143009162fdff97a80a9452883fa072e80b00f9e00313aae14300915cfdff97a80a9452883fa072e80b00f9e00313aae143009156fdff97f37bc2a8c0035fd6f503002a082281529f02086ba101005408da8052bf02086b41010054e91f40b9084482523f01086bc1000054e91b40b908b481523f01086b410000544703ff170603ff17",
+      "reason": "Six AAPCS64 trampolines in trailing zero padding"
+    },
+    {
+      "offset": "0xd0",
+      "old": "3045090000000000",
+      "new": "a847090000000000",
+      "reason": "Extend executable PT_LOAD size"
+    },
+    {
+      "offset": "0xd8",
+      "old": "3045090000000000",
+      "new": "a847090000000000",
+      "reason": "Extend executable PT_LOAD size"
+    },
+    {
+      "offset": "0x7d3b8",
+      "old": "f503002a",
+      "new": "ebfc0014",
+      "reason": "Guard binned HI1631Q RAW-size normalization"
+    }
+  ],
+  "unchanged_project_constructors": 49,
+  "main_patch_bytes_preserved": true,
+  "telephoto_patch_bytes_preserved": true,
+  "device_tested": false,
+  "validation": "Static constructors plus normalization block emulation; sensor mode, CFA, color and GCam pending",
+  "normalization_guard": {
+    "hook": "0x7d3b8",
+    "trampoline": "0xbc764",
+    "match_raw_size": [
+      2320,
+      1744
+    ],
+    "match_active_size": [
+      4640,
+      3488
+    ],
+    "scope": "Dimension guard; this tuple is introduced only for HI1631Q by this build"
+  }
+}

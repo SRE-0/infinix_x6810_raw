@@ -1,0 +1,18 @@
+0009fb90 [0009fb90] c80240b9 ldr      w8, [x22]
+0009fb94 [0009fb94] 29008052 mov      w9, #1
+0009fb98 [0009fb98] 1f01096b cmp      w8, w9
+0009fb9c [0009fb9c] a1010054 b.ne     #0x9fbd0
+0009fba0 [0009fba0] 09008052 mov      w9, #0
+0009fba4 [0009fba4] bf02096b cmp      w21, w9
+0009fba8 [0009fba8] 41010054 b.ne     #0x9fbd0
+0009fbac [0009fbac] 081c40b9 ldr      w8, [x0, #0x1c]
+0009fbb0 [0009fbb0] 09228152 mov      w9, #0x910
+0009fbb4 [0009fbb4] 1f01096b cmp      w8, w9
+0009fbb8 [0009fbb8] c1000054 b.ne     #0x9fbd0
+0009fbbc [0009fbbc] 082040b9 ldr      w8, [x0, #0x20]
+0009fbc0 [0009fbc0] 09da8052 mov      w9, #0x6d0
+0009fbc4 [0009fbc4] 1f01096b cmp      w8, w9
+0009fbc8 [0009fbc8] 41000054 b.ne     #0x9fbd0
+0009fbcc [0009fbcc] 6fa3fe17 b        #0x48988
+0009fbd0 [0009fbd0] a80358b8 ldur     w8, [x29, #-0x80]
+0009fbd4 [0009fbd4] 35a3fe17 b        #0x488a8

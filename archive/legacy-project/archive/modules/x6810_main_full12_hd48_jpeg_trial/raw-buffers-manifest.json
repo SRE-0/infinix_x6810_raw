@@ -1,0 +1,32 @@
+{
+  "input_sha256": "40360af0dc17d589cdf36b5388b642200093511815e00d702f5d02e612333c47",
+  "output_sha256": "d3bfa9aab5d43af352a3bf717ff4b399cad6744ccc2c548ef8ae4650f3635ad2",
+  "hook": "0x5a0b8",
+  "cave_start": "0x9fbe0",
+  "cave_end": "0x9fbf0",
+  "behavior": "RAW16 output collection: max(original capture-policy count, 6)",
+  "scope": "Default policy, collection root ParsedAppImageStreamInfo+0x50; all camera IDs",
+  "changes": [
+    {
+      "offset": "0x5a0b8",
+      "old": "e10313aa",
+      "new": "ca160114"
+    },
+    {
+      "offset": "0x9fbe0",
+      "old": "00000000000000000000000000000000",
+      "new": "c10080527f1a00f16122819a34e9fe17"
+    },
+    {
+      "offset": "0xd0",
+      "old": "d8eb060000000000",
+      "new": "f0eb060000000000"
+    },
+    {
+      "offset": "0xd8",
+      "old": "d8eb060000000000",
+      "new": "f0eb060000000000"
+    }
+  ],
+  "size": 680192
+}

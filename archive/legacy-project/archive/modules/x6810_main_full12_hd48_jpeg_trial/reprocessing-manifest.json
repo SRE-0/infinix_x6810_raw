@@ -1,0 +1,32 @@
+{
+  "input_sha256": "00066e79cbeb0020d09e8e1fb43670cde08ef30133bd0d86a138609fb561e4a6",
+  "output_sha256": "dc18e2cdd107f4e56c98114a2de16592e275dd37e2bbd3960df7d12806d308d5",
+  "changes": [
+    {
+      "offset": "0xbc6c4",
+      "old": "43fdff97",
+      "new": "4f000094"
+    },
+    {
+      "offset": "0xbc800",
+      "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "f37bbea9f30300aaf2fcff9788008052e8430039e00313aae1430091edfcff97e8008052e8430039e00313aae1430091e8fcff97f37bc2a8c0035fd6"
+    },
+    {
+      "offset": "0xd0",
+      "old": "fc47090000000000",
+      "new": "3c48090000000000"
+    },
+    {
+      "offset": "0xd8",
+      "old": "fc47090000000000",
+      "new": "3c48090000000000"
+    }
+  ],
+  "constructors_verified": 52,
+  "scope": "HI1631Q only: append PRIVATE_REPROCESSING=4, YUV_REPROCESSING=7; existing updateReprocessCapabilities generates dependent metadata",
+  "hardware_validated": false,
+  "hook": "0xbc6c4",
+  "cave_start": "0xbc800",
+  "cave_end": "0xbc83c"
+}

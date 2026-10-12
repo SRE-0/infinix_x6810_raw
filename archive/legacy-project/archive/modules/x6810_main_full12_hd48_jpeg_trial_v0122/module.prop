@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.12.2-full12-hd48-trial
+version=0.12.2-full12-hd48-trial
+versionCode=14
+author=SRE-0
+description=Experimental resolution metadata on v0.12.2; preserves RAW, OIS, capture cap and native torch.

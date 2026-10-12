@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.9.0-front-reprocessing
+version=0.9.0-front-reprocessing
+versionCode=9
+author=SRE-0
+description=HI1631Q binned RAW plus PRIVATE/YUV reprocessing. Four real reprocess paths validated at 1968x864. Rear configuration preserved.

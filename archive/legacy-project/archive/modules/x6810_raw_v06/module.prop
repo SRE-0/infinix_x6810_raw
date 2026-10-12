@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW16 main + telephoto + HI1631Q remosaic
+version=0.6.0-hi1631q-remosaic
+versionCode=6
+author=SRE-0
+description=Preserves tested rear RAW; removes invalid binned front RAW and enables MTK 4Cell remosaic/processed RAW defaults for camera 1. Includes auxiliary camera properties.

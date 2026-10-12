@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.10.0-full-binned-streams
+version=0.10.0-full-binned-streams
+versionCode=10
+author=SRE-0
+description=HI1631Q maximum RAW/JPEG/YUV/PRIVATE/YV12 outputs and PRIVATE/YUV inputs at 2320x1744. Nine capture paths tested. Rear metadata preserved.

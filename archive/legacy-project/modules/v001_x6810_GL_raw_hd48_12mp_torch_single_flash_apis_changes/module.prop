@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=v001_x6810_GL_raw_hd48_12mp_torch_single_flash_apis_changes
+version=v001
+versionCode=1
+author=SRE-0
+description=RAW/HD48 Level 3+; Camera2 TORCH levels 1-9 (duties 0-8) and SINGLE photographic levels 1-30 (duties 0-29).

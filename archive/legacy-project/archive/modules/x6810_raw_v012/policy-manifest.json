@@ -1,0 +1,34 @@
+{
+  "input_sha256": "47924889f98b5e01c3220eb69235df8580d597172faa439cd71beb0f8f41d7bd",
+  "output_sha256": "40360af0dc17d589cdf36b5388b642200093511815e00d702f5d02e612333c47",
+  "size": 680192,
+  "hook": "0x488a4",
+  "cave_start": "0x9fb90",
+  "cave_end": "0x9fbd8",
+  "changes": [
+    {
+      "offset": "0x488a4",
+      "old": "a80358b8",
+      "new": "bb5c0114"
+    },
+    {
+      "offset": "0x9fb90",
+      "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "c80240b9290080521f01096ba101005409008052bf02096b41010054081c40b9092281521f01096bc1000054082040b909da80521f01096b410000546fa3fe17a80358b835a3fe17"
+    },
+    {
+      "offset": "0xd0",
+      "old": "90eb060000000000",
+      "new": "d8eb060000000000"
+    },
+    {
+      "offset": "0xd8",
+      "old": "90eb060000000000",
+      "new": "d8eb060000000000"
+    }
+  ],
+  "guard": "openId=1 AND candidate=PREVIEW AND sensor size=2320x1744",
+  "paired_metastore": "front-v0.7; only 2320x1744 front RAW",
+  "hardware_test": false,
+  "preserve_original_requested_size_checks": true
+}

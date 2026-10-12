@@ -1,0 +1,69 @@
+{
+  "profile": "x6810-s5kgm1st-raw16-12mp-experimental",
+  "input_sha256": "dbd740c5c7ba3081fb9d38b68b2f9975e19d6faad41dd5f87ce75f3c7d7be485",
+  "output_sha256": "daecf7263eafbf1075432979e2854617ef0e830e301059a22977551e5469caa8",
+  "size": 784232,
+  "changed_bytes": 176,
+  "target_symbol": "constructCustStaticMetadata_PLATFORM_PROJECT_SENSOR_DRVNAME_S5KGM1ST_MIPI_RAW",
+  "raw_stream": [
+    32,
+    4000,
+    3000,
+    0,
+    50000000,
+    33333333
+  ],
+  "changes": [
+    {
+      "offset": "0x5482c",
+      "old": "e99c0194",
+      "new": "419f0194",
+      "reason": "Append RAW capability"
+    },
+    {
+      "offset": "0x54c4c",
+      "old": "199c0194",
+      "new": "439e0194",
+      "reason": "Append RAW16 stream tuple"
+    },
+    {
+      "offset": "0xbc530",
+      "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "f37bbea9f30300aaa6fdff9768008052e8430039e00313aae1430091a1fdff97f37bc2a8c0035fd6f37bbea9f30300aad4fdff9708048052e80b00f9e00313aae1430091cffdff9708f48152e80b00f9e00313aae1430091cafdff9708778152e80b00f9e00313aae1430091c5fdff9708008052e80b00f9e00313aae1430091c0fdff9708109e52485fa072e80b00f9e00313aae1430091bafdff97a80a9452883fa072e80b00f9e00313aae1430091b4fdff97f37bc2a8c0035fd6",
+      "reason": "AAPCS64 trampolines in trailing zero padding"
+    },
+    {
+      "offset": "0xd0",
+      "old": "3045090000000000",
+      "new": "ec45090000000000",
+      "reason": "Extend executable PT_LOAD size"
+    },
+    {
+      "offset": "0xd8",
+      "old": "3045090000000000",
+      "new": "ec45090000000000",
+      "reason": "Extend executable PT_LOAD size"
+    }
+  ],
+  "capabilities_before": [
+    0,
+    1,
+    2,
+    5,
+    6,
+    7,
+    4
+  ],
+  "capabilities_after": [
+    0,
+    1,
+    2,
+    5,
+    6,
+    7,
+    4,
+    3
+  ],
+  "other_constructors_verified": 51,
+  "device_tested": false
+}

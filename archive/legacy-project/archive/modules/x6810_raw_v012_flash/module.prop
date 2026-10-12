@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.12.1-flash-experimental
+version=0.12.1-flash-experimental
+versionCode=13
+author=SRE-0
+description=Capture-only main flash duty cap 9..29; OEM timing and v0.12 RAW/OIS preserved; no official strength API support.

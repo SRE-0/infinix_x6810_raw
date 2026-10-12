@@ -1,0 +1,5 @@
+{
+  "system/vendor/lib64/libmtkcam_metastore.so": "a7f9b751cb73f4bc567f8db89b53b8e3a143d64ed605764e34a3abd719007b35",
+  "system/vendor/lib64/libmtkcam_pipelinepolicy.so": "d3bfa9aab5d43af352a3bf717ff4b399cad6744ccc2c548ef8ae4650f3635ad2",
+  "system/vendor/lib64/libcam.hal3a.v3.so": "4d5a62e26aa736cc9b7632ba6b9ee6f63904f5d248ec3bfeece87fe80dcd15d2"
+}

@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.12.0-ois-experimental
+version=0.12.0-ois-experimental
+versionCode=12
+author=SRE-0
+description=OV08A10 Camera2 OIS OFF/ON bridge; v0.11 RAW preserved. Experimental: optical effectiveness not yet measured.

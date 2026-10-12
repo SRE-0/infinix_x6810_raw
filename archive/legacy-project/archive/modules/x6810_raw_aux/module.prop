@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW16 main + telephoto + front candidate
+version=0.2.0-aux-experimental
+versionCode=2
+author=SRE-0
+description=Preserves confirmed S5KGM1ST RAW patch; adds OV08A10 and candidate OV16B10FF RAW streams. Auxiliary capture validation pending.

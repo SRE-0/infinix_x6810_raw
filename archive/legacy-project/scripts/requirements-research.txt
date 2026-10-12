@@ -1,0 +1,2 @@
+# Only required for historical Frida traces; flash-module builds do not use it.
+frida==17.18.0

@@ -1,0 +1,34 @@
+{
+  "input_sha256": "2b3bca8dfa83ea01c3f210b1b187c173a453665f3373afe9e8d17614b0fe95df",
+  "output_sha256": "bdcf1bb3e5abe4bc14612e365730e7e15c4dd427b601060b7b30791944fdfddb",
+  "changes": [
+    {
+      "offset": "0x4e648",
+      "old": "9ab50194",
+      "new": "5ab80194"
+    },
+    {
+      "offset": "0x4e658",
+      "old": "96b50194",
+      "new": "56b80194"
+    },
+    {
+      "offset": "0xbc7b0",
+      "old": "000000000000000000000000",
+      "new": "08d88052280000f93efdff17"
+    },
+    {
+      "offset": "0xd0",
+      "old": "a847090000000000",
+      "new": "bc47090000000000"
+    },
+    {
+      "offset": "0xd8",
+      "old": "a847090000000000",
+      "new": "bc47090000000000"
+    }
+  ],
+  "constructors_verified": 52,
+  "scope": "HI1631Q YUV square 3456 -> 1728 only",
+  "hardware_test": false
+}

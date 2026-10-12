@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.8.0-binned-preview-experimental
+version=0.8.0-binned-preview-experimental
+versionCode=8
+author=SRE-0
+description=HI1631Q binned RAW 2320x1744 and guarded preview policy. MGC preview and JPEG+DNG tested. Limits front processed sizes. Extended validation pending.

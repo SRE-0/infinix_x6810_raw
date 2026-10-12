@@ -1,0 +1,32 @@
+{
+  "input_sha256": "2b3bca8dfa83ea01c3f210b1b187c173a453665f3373afe9e8d17614b0fe95df",
+  "output_sha256": "00066e79cbeb0020d09e8e1fb43670cde08ef30133bd0d86a138609fb561e4a6",
+  "changes": [
+    {
+      "offset": "0x7eacc",
+      "old": "48100034",
+      "new": "39f70014"
+    },
+    {
+      "offset": "0xbc7b0",
+      "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "ab1240b97f050071e1010054094482529f0309eb81010054eb2340f909b481527f0109eb0101005409228152ff0009eb6c28e1544b0940f909da80527f0109ebec27e1540827e134b608ff17"
+    },
+    {
+      "offset": "0xd0",
+      "old": "a847090000000000",
+      "new": "fc47090000000000"
+    },
+    {
+      "offset": "0xd8",
+      "old": "a847090000000000",
+      "new": "fc47090000000000"
+    }
+  ],
+  "hook": "0x7eacc",
+  "cave_start": "0xbc7b0",
+  "cave_end": "0xbc7fc",
+  "hardware_test": false,
+  "scope": "openId=1 AND pixelArray=4640x3488; omit candidates width>2320 OR height>1744",
+  "limitation": "Front high-resolution processed outputs unavailable while enabled"
+}

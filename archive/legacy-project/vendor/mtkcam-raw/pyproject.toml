@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mtkcam-raw"
+version = "0.1.0"
+description = "MediaTek Camera RAW enablement — analyze and patch libmtkcam_metastore.so"
+readme = "README.md"
+license = "MPL-2.0"
+requires-python = ">=3.11"
+keywords = ["mediatek", "camera", "raw", "android", "hal"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+]
+
+[project.urls]
+Homepage = "https://github.com/ReCoreShift/mtkcam-raw"
+Repository = "https://github.com/ReCoreShift/mtkcam-raw"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+mtkcam-raw = "mtkcam_raw.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW16 main + telephoto + HI1631Q binned
+version=0.5.0-hi1631q-binned
+versionCode=5
+author=SRE-0
+description=Preserves rear RAW; adds full and 2320x1744 binned HI1631Q RAW, consistent timing, and auxiliary exposure properties.

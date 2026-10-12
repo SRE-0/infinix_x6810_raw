@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=v000_x6810_GL_raw_hd48_12mp_torch_changes
+version=v000
+versionCode=1
+author=SRE-0
+description=RAW/HD48 Level 3+ with Camera2 TORCH strength 1-9; complete prior release.

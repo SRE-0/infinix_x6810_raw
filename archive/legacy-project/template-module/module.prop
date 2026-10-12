@@ -1,0 +1,6 @@
+id=your_module_id
+name=Module template
+version=v0.1.0
+versionCode=1
+author=SRE-0
+description=Base template for SRE-0 Magisk/APatch modules. See https://github.com/SRE-0 for source and updates.

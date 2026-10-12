@@ -1,0 +1,35 @@
+name: Release RAW and flash modules
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Unique release tag
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ inputs.tag }}
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.repository_owner == 'SRE-0' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/validate.py
+      - run: python scripts/build.py
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          [[ "$RELEASE_TAG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$ ]] || exit 1
+          gh release create "$RELEASE_TAG" dist/releases/* --target "$GITHUB_SHA" --title "$RELEASE_TAG" --notes-file .github/RELEASE_NOTES.md

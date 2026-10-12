@@ -1,0 +1,96 @@
+{
+  "input_sha256": "0e61fed272068a7855e236f9fb23d3e07e46bc1ba5588f92398c1a789e457f0c",
+  "output_sha256": "2f361a730064a2e8ccab8a3cd7fce8854f30dfffa141e7888f0f3b91b8aa867c",
+  "cave_start": "0x37aa10",
+  "cave_end": "0x37ab94",
+  "blocks": {
+    "original_set_torch": {
+      "address": "0x37aa10",
+      "size": 8,
+      "source": "sub sp,sp,#0x100; b 0x14ee38"
+    },
+    "ordinary_torch_reset": {
+      "address": "0x37aa18",
+      "size": 96,
+      "source": "\n        stp x19,x30,[sp,#-32]!\n        str x20,[sp,#16]\n        mov x19,x0\n        mov w20,w1\n        cmp w1,#1\n        b.ne call_original\n        ldr w8,[x19,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne call_original\n        mov w1,#0x107\n    call_original:\n        bl 3648016\n        cbnz w0,done\n        cmp w20,#1\n        b.hi done\n        ldr w8,[x19,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne done\n        mov w8,#7\n        str w8,[x19,#0xb8]\n    done:\n        ldr x20,[sp,#16]\n        ldp x19,x30,[sp],#32\n        ret\n    "
+    },
+    "strength_setter": {
+      "address": "0x37aa78",
+      "size": 88,
+      "source": "\n        ldr w8,[x0,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne unsupported\n        sub w8,w1,#1\n        cmp w8,#8\n        b.hi invalid\n        stp x19,x30,[sp,#-32]!\n        str x20,[sp,#16]\n        mov x19,x0\n        mov w20,w1\n        add w1,w1,#0x100\n        bl 3648016\n        cbnz w0,done\n        str w20,[x19,#0xb8]\n    done:\n        ldr x20,[sp,#16]\n        ldp x19,x30,[sp],#32\n        ret\n    unsupported: mov w0,#-38; ret\n    invalid: mov w0,#-22; ret\n    "
+    },
+    "strength_getter": {
+      "address": "0x37aad0",
+      "size": 68,
+      "source": "\n        ldr w8,[x0,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne unsupported\n        cbz x1,invalid\n        ldr w8,[x0,#0xb8]\n        sub w9,w8,#1\n        cmp w9,#8\n        mov w9,#7\n        csel w8,w8,w9,ls\n        str w8,[x1]\n        mov w0,#0\n        ret\n    unsupported: mov w0,#-38; ret\n    invalid: mov w0,#-22; ret\n    "
+    },
+    "strength_characteristics": {
+      "address": "0x37ab14",
+      "size": 128,
+      "source": "\n        cbnz w21,done\n        ldr w8,[x19,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne done\n        mov w8,#9\n        str w8,[sp,#0xc]\n        add x0,x19,#0x130\n        mov w1,#2\n        movk w1,#5,lsl #16\n        add x2,sp,#0xc\n        mov w3,#1\n        bl 0x377030\n        mov w21,w0\n        cbnz w0,done\n        mov w8,#7\n        str w8,[sp,#0xc]\n        add x0,x19,#0x130\n        mov w1,#3\n        movk w1,#5,lsl #16\n        add x2,sp,#0xc\n        mov w3,#1\n        bl 0x377030\n        mov w21,w0\n        cbnz w0,done\n        mov w8,#7\n        str w8,[x19,#0xb8]\n        str w8,[x19,#0xbc]\n        mov w8,#9\n        str w8,[x19,#0xc0]\n    done:\n        mov w0,w21\n        b 0x13f2a8\n    "
+    }
+  },
+  "changes": [
+    {
+      "offset": "0x37aa10",
+      "old": "0000000000000000",
+      "new": "ff0304d10951f717"
+    },
+    {
+      "offset": "0x37aa18",
+      "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "f37bbea9f40b00f9f30300aaf403012a3f040071c1000054682240b9490086521f01096b41000054e1208052f3ffff97200100359f060071e8000054682240b9490086521f01096b61000054e800805268ba00b9f40b40f9f37bc2a8c0035fd6"
+    },
+    {
+      "offset": "0x14ee34",
+      "old": "ff0304d1",
+      "new": "f9ae0814"
+    },
+    {
+      "offset": "0x37aa78",
+      "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "082040b9490086521f01096be1010054280400511f210071c8010054f37bbea9f40b00f9f30300aaf403012a21000411daffff974000003574ba00b9f40b40f9f37bc2a8c0035fd6a0048012c0035fd6a0028012c0035fd6"
+    },
+    {
+      "offset": "0x37aad0",
+      "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "082040b9490086521f01096b41010054610100b408b840b9090500513f210071e90080520891891a280000b900008052c0035fd6a0048012c0035fd6a0028012c0035fd6"
+    },
+    {
+      "offset": "0x14f2ec",
+      "old": "fd7bbfa9",
+      "new": "e3ad0814"
+    },
+    {
+      "offset": "0x14f31c",
+      "old": "fd7bbfa9",
+      "new": "edad0814"
+    },
+    {
+      "offset": "0x14f208",
+      "old": "61020012",
+      "new": "e103132a"
+    },
+    {
+      "offset": "0x37ab14",
+      "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "d5030035682240b9490086521f01096b4103005428018052e80f00b960c2049141008052a100a072e2330091230080523bf1ff97f503002a00020035e8008052e80f00b960c2049161008052a100a072e23300912300805231f1ff97f503002ac0000035e800805268ba00b968be00b92801805268c200b9e003152ac611f717"
+    },
+    {
+      "offset": "0x13f2a4",
+      "old": "e003152a",
+      "new": "1cee0814"
+    },
+    {
+      "offset": "0x108",
+      "old": "102a2c0000000000",
+      "new": "942b2c0000000000"
+    },
+    {
+      "offset": "0x110",
+      "old": "102a2c0000000000",
+      "new": "942b2c0000000000"
+    }
+  ],
+  "hardware_validated": false
+}

@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW16 main + telephoto + front HI1631Q
+version=0.4.0-timing-props
+versionCode=4
+author=SRE-0
+description=Preserves confirmed S5KGM1ST RAW patch; adds OV08A10 and HI1631Q RAW streams. Fixes HI1631Q RAW timing dimensions; includes auxiliary exposure properties. Quad Bayer color requires conversion.

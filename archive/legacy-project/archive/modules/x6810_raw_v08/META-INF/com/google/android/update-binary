@@ -1,0 +1,12 @@
+#!/sbin/sh
+# APatch installs through its own manager. This entry point is for Magisk.
+umask 022
+OUTFD=$2
+ZIPFILE=$3
+if [ ! -f /data/adb/magisk/util_functions.sh ]; then
+  echo "Install this module through APatch or Magisk Manager."
+  exit 1
+fi
+. /data/adb/magisk/util_functions.sh
+install_module
+exit 0

@@ -1,0 +1,4 @@
+0009fbe0 [0009fbe0] c1008052 mov      w1, #6
+0009fbe4 [0009fbe4] 7f1a00f1 cmp      x19, #6
+0009fbe8 [0009fbe8] 6122819a csel     x1, x19, x1, hs
+0009fbec [0009fbec] 34e9fe17 b        #0x5a0bc

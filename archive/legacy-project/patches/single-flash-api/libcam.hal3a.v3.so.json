@@ -1,0 +1,96 @@
+{
+  "input_sha256": "0669ac8e0f329e941ead3098a3ea0828597f8ce68c40a6ec7bef4607d6bbbecd",
+  "output_sha256": "8fdc35e83cf5f08dcc5c3e841256514f4fa9933e24aa6841a003eb79006b86b2",
+  "cave_start": "0x2d7b50",
+  "cave_end": "0x2d7d90",
+  "blocks": {
+    "frame_strength_ring": {
+      "address": "0x2d7b50",
+      "size": 112,
+      "source": "\n        adrp x8,3170304\n        add x8,x8,#3216\n    lock:\n        ldaxr w9,[x8]\n        cbnz w9,lock\n        mov w9,#1\n        stxr w10,w9,[x8]\n        cbnz w10,lock\n        and w9,w1,#255\n        mov w10,#24\n        madd x9,x9,x10,x8\n        add x9,x9,#16\n        cbz w3,read\n        str x0,[x9]\n        str w1,[x9,#8]\n        str w2,[x9,#12]\n        mov w0,wzr\n        b unlock\n    read:\n        ldr x10,[x9]\n        cmp x10,x0\n        b.ne missing\n        ldr w10,[x9,#8]\n        cmp w10,w1\n        b.ne missing\n        ldr w0,[x9,#12]\n        b unlock\n    missing:\n        mov w0,wzr\n    unlock:\n        stlr wzr,[x8]\n        ret\n    "
+    },
+    "parse_private_single": {
+      "address": "0x2d7bc0",
+      "size": 172,
+      "source": "\n        stp x29,x30,[sp,#-112]!\n        stp x0,x1,[sp,#16]\n        stp x2,x8,[sp,#32]\n        str wzr,[x19,#0x3fc]\n        add x8,sp,#48\n        stp xzr,xzr,[x8]\n        stp xzr,xzr,[x8,#16]\n        stp xzr,xzr,[x8,#32]\n        stp xzr,xzr,[x8,#48]\n        mov x0,x28\n        mov w1,#0x8c\n        movk w1,#0xc000,lsl #16\n        mov w2,wzr\n        bl 0x2d06a0\n        add x0,sp,#48\n        bl 0x2d06c0\n        cbnz w0,destruct\n        add x0,sp,#48\n        mov w1,wzr\n        bl 0x2d48f0\n        mov w8,#0x6810\n        lsl w8,w8,#16\n        sub w9,w0,w8\n        sub w9,w9,#1\n        cmp w9,#29\n        b.hi destruct\n        str w0,[x19,#0x3fc]\n    destruct:\n        add x0,sp,#48\n        bl 0x2cfbb0\n        ldr w8,[x19,#0x28]\n        cmp w8,#1\n        b.ne restored\n        ldr x8,[sp,#0x180]\n        ldr w1,[x8,#0x28]\n        mov x0,x19\n        ldr w2,[x19,#0x3fc]\n        mov w3,#1\n        bl 2980688\n    restored:\n        ldp x2,x8,[sp,#32]\n        ldp x0,x1,[sp,#16]\n        ldp x29,x30,[sp],#112\n        mov x0,x19\n        b 0x24ff94\n    "
+    },
+    "params_under_mutex": {
+      "address": "0x2d7c6c",
+      "size": 16,
+      "source": "\n        ldr w8,[x21,#0x30c]\n        str w8,[x20,#0x484]\n        mov x27,x20\n        b 0x101014\n    "
+    },
+    "single_scenario_duty": {
+      "address": "0x2d7c7c",
+      "size": 140,
+      "source": "\n        ldr w8,[x19,#0xc4]\n        cmp w8,#1\n        b.ne original\n        ldr w8,[x19,#0x484]\n        mov w9,#0x6810\n        lsl w9,w9,#16\n        sub w8,w8,w9\n        sub w8,w8,#1\n        cmp w8,#29\n        b.hi original\n        stp x0,x30,[sp,#-48]!\n        ldur x9,[x0,#0x8c]\n        ldur x10,[x0,#0x94]\n        stp x9,x10,[sp,#16]\n        mov w2,w8\n        movk x2,#0xffff,lsl #32\n        movk x2,#0xffff,lsl #48\n        mov x3,#300\n        mov w1,#4\n        bl 0x228900\n        ldr x0,[sp]\n        mov w8,#300\n        str w8,[x0,#0x94]\n        mov w1,#1\n        mov w2,#4\n        bl 0x2cedf0\n        ldr x9,[sp]\n        ldp x10,x11,[sp,#16]\n        stur x10,[x9,#0x8c]\n        stur x11,[x9,#0x94]\n        ldr x30,[sp,#8]\n        add sp,sp,#48\n        b 0x1038bc\n    original:\n        bl 0x2cedf0\n        b 0x1038bc\n    "
+    },
+    "single_result_by_frame": {
+      "address": "0x2d7d08",
+      "size": 136,
+      "source": "\n        cmp w19,#1\n        b.ne original\n        ldr w8,[x25,#0x28]\n        cmp w8,#1\n        b.ne original\n        stp x29,x30,[sp,#-96]!\n        mov x0,x25\n        mov w1,w22\n        mov w3,wzr\n        bl 2980688\n        mov w8,#0x6810\n        lsl w8,w8,#16\n        sub w9,w0,w8\n        sub w9,w9,#1\n        cmp w9,#29\n        b.hi done\n        str w0,[sp,#80]\n        add x0,sp,#16\n        mov w1,#0x8c\n        movk w1,#0xc000,lsl #16\n        bl 0x2cfb80\n        add x0,sp,#16\n        add x1,sp,#80\n        bl 0x2d0670\n        add x0,x24,#0x30\n        mov w1,#0x8c\n        movk w1,#0xc000,lsl #16\n        add x2,sp,#16\n        bl 0x2cfba0\n        add x0,sp,#16\n        bl 0x2cfbb0\n    done:\n        ldp x29,x30,[sp],#96\n    original:\n        mov w0,w19\n        b 0x25f2d0\n    "
+    }
+  },
+  "changes": [
+    {
+      "offset": "0x148",
+      "old": "2836020000000000",
+      "new": "404e020000000000"
+    },
+    {
+      "offset": "0x2d7b50",
+      "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "680100f00841329109fd5f88e9ffff3529008052097d0a888affff35291c00120a03805229210a9b29410091c3000034200100f9210900b9220d00b9e0031f2a0a0000142a0140f95f0100ebc10000542a0940b95f01016b61000054200d40b902000014e0031f2a1ffd9f88c0035fd6"
+    },
+    {
+      "offset": "0x2d7bc0",
+      "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "fd7bb9a9e00701a9e22302a97ffe03b9e8c300911f7d00a91f7d01a91f7d02a91f7d03a9e0031caa811180520100b872e2031f2aabe2ff97e0c30091b1e2ff9760010035e0c30091e1031f2a39f3ff9708028d52083d10530900084b290500513f7500714800005460fe03b9e0c30091e0dfff97682a40b91f050071e1000054e8c340f9012940b9e00313aa62fe43b923008052bfffff97e22342a9e00741a9fd7bc7a8e00313aacbe0fd17"
+    },
+    {
+      "offset": "0x24ff90",
+      "old": "e00313aa",
+      "new": "0c1f0214"
+    },
+    {
+      "offset": "0x2d7c6c",
+      "old": "00000000000000000000000000000000",
+      "new": "a80e43b9888604b9fb0314aae7a4f817"
+    },
+    {
+      "offset": "0x101010",
+      "old": "fb0314aa",
+      "new": "175b0714"
+    },
+    {
+      "offset": "0x2d7c7c",
+      "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "68c640b91f050071e1030054688644b909028d52293d10530801094b080500511f75007108030054e07bbda909c048f80a4049f8e92b01a9e203082ae2ffdff2e2fffff2832580d2810080520e43fd97e00340f988258052089400b9210080528200805244dcff97e90340f9ea2f41a92ac108f82b4109f8fe0740f9ffc30091f0aef8173cdcff97eeaef817"
+    },
+    {
+      "offset": "0x1038b8",
+      "old": "4e2d0794",
+      "new": "f1500714"
+    },
+    {
+      "offset": "0x2d7d08",
+      "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "7f060071e1030054282b40b91f05007181030054fd7bbaa9e00319aae103162ae3031f2a89ffff9708028d52083d10530900084b290500513f75007108020054e05300b9e0430091811180520100b8728adfff97e0430091e143019143e2ff9700c30091811180520100b872e24300918adfff97e04300918cdfff97fd7bc6a8e003132a511dfe17"
+    },
+    {
+      "offset": "0x25f2cc",
+      "old": "e003132a",
+      "new": "8fe20114"
+    },
+    {
+      "offset": "0xd0",
+      "old": "485b1e0000000000",
+      "new": "905d1e0000000000"
+    },
+    {
+      "offset": "0xd8",
+      "old": "485b1e0000000000",
+      "new": "905d1e0000000000"
+    }
+  ],
+  "hardware_validated": false
+}

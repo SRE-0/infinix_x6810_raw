@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 main-full12-hd48-jpeg-trial
+version=0.11.1-main-full12-hd48-jpeg-trial
+versionCode=11
+author=SRE-0
+description=Experimental main JPEG/YUV 4000x3000. Hardware validation pending. Adds JPEG 8000x6000 metadata only; native 48MP unverified.

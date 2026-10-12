@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=v0122_x6810_raw_native_torch
+version=v0122_x6810_raw_native_torch
+versionCode=14
+author=SRE-0
+description=Native CameraManager torch strength 1..9 (physical duties 0..8), RAW/OIS and bounded capture cap; exact Android 16 GSI only; SINGLE intensity not implemented.

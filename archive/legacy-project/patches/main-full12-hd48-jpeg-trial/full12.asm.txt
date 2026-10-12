@@ -1,0 +1,100 @@
+000bc950 [000bc950] f37bbea9 stp      x19, x30, [sp, #-0x20]!
+000bc954 [000bc954] f30300aa mov      x19, x0
+000bc958 [000bc958] d6fcff97 bl       #0xbbcb0
+000bc95c [000bc95c] 28048052 mov      w8, #0x21
+000bc960 [000bc960] e80b00f9 str      x8, [sp, #0x10]
+000bc964 [000bc964] e00313aa mov      x0, x19
+000bc968 [000bc968] e1430091 add      x1, sp, #0x10
+000bc96c [000bc96c] d1fcff97 bl       #0xbbcb0
+000bc970 [000bc970] 08f48152 mov      w8, #0xfa0
+000bc974 [000bc974] e80b00f9 str      x8, [sp, #0x10]
+000bc978 [000bc978] e00313aa mov      x0, x19
+000bc97c [000bc97c] e1430091 add      x1, sp, #0x10
+000bc980 [000bc980] ccfcff97 bl       #0xbbcb0
+000bc984 [000bc984] 08778152 mov      w8, #0xbb8
+000bc988 [000bc988] e80b00f9 str      x8, [sp, #0x10]
+000bc98c [000bc98c] e00313aa mov      x0, x19
+000bc990 [000bc990] e1430091 add      x1, sp, #0x10
+000bc994 [000bc994] c7fcff97 bl       #0xbbcb0
+000bc998 [000bc998] 08008052 mov      w8, #0
+000bc99c [000bc99c] e80b00f9 str      x8, [sp, #0x10]
+000bc9a0 [000bc9a0] e00313aa mov      x0, x19
+000bc9a4 [000bc9a4] e1430091 add      x1, sp, #0x10
+000bc9a8 [000bc9a8] c2fcff97 bl       #0xbbcb0
+000bc9ac [000bc9ac] 08109e52 mov      w8, #0xf080
+000bc9b0 [000bc9b0] 485fa072 movk     w8, #0x2fa, lsl #16
+000bc9b4 [000bc9b4] e80b00f9 str      x8, [sp, #0x10]
+000bc9b8 [000bc9b8] e00313aa mov      x0, x19
+000bc9bc [000bc9bc] e1430091 add      x1, sp, #0x10
+000bc9c0 [000bc9c0] bcfcff97 bl       #0xbbcb0
+000bc9c4 [000bc9c4] a80a9452 mov      w8, #0xa055
+000bc9c8 [000bc9c8] 883fa072 movk     w8, #0x1fc, lsl #16
+000bc9cc [000bc9cc] e80b00f9 str      x8, [sp, #0x10]
+000bc9d0 [000bc9d0] e00313aa mov      x0, x19
+000bc9d4 [000bc9d4] e1430091 add      x1, sp, #0x10
+000bc9d8 [000bc9d8] b6fcff97 bl       #0xbbcb0
+000bc9dc [000bc9dc] 68048052 mov      w8, #0x23
+000bc9e0 [000bc9e0] e80b00f9 str      x8, [sp, #0x10]
+000bc9e4 [000bc9e4] e00313aa mov      x0, x19
+000bc9e8 [000bc9e8] e1430091 add      x1, sp, #0x10
+000bc9ec [000bc9ec] b1fcff97 bl       #0xbbcb0
+000bc9f0 [000bc9f0] 08f48152 mov      w8, #0xfa0
+000bc9f4 [000bc9f4] e80b00f9 str      x8, [sp, #0x10]
+000bc9f8 [000bc9f8] e00313aa mov      x0, x19
+000bc9fc [000bc9fc] e1430091 add      x1, sp, #0x10
+000bca00 [000bca00] acfcff97 bl       #0xbbcb0
+000bca04 [000bca04] 08778152 mov      w8, #0xbb8
+000bca08 [000bca08] e80b00f9 str      x8, [sp, #0x10]
+000bca0c [000bca0c] e00313aa mov      x0, x19
+000bca10 [000bca10] e1430091 add      x1, sp, #0x10
+000bca14 [000bca14] a7fcff97 bl       #0xbbcb0
+000bca18 [000bca18] 08008052 mov      w8, #0
+000bca1c [000bca1c] e80b00f9 str      x8, [sp, #0x10]
+000bca20 [000bca20] e00313aa mov      x0, x19
+000bca24 [000bca24] e1430091 add      x1, sp, #0x10
+000bca28 [000bca28] a2fcff97 bl       #0xbbcb0
+000bca2c [000bca2c] 08109e52 mov      w8, #0xf080
+000bca30 [000bca30] 485fa072 movk     w8, #0x2fa, lsl #16
+000bca34 [000bca34] e80b00f9 str      x8, [sp, #0x10]
+000bca38 [000bca38] e00313aa mov      x0, x19
+000bca3c [000bca3c] e1430091 add      x1, sp, #0x10
+000bca40 [000bca40] 9cfcff97 bl       #0xbbcb0
+000bca44 [000bca44] 08008052 mov      w8, #0
+000bca48 [000bca48] e80b00f9 str      x8, [sp, #0x10]
+000bca4c [000bca4c] e00313aa mov      x0, x19
+000bca50 [000bca50] e1430091 add      x1, sp, #0x10
+000bca54 [000bca54] 97fcff97 bl       #0xbbcb0
+000bca58 [000bca58] 28048052 mov      w8, #0x21
+000bca5c [000bca5c] e80b00f9 str      x8, [sp, #0x10]
+000bca60 [000bca60] e00313aa mov      x0, x19
+000bca64 [000bca64] e1430091 add      x1, sp, #0x10
+000bca68 [000bca68] 92fcff97 bl       #0xbbcb0
+000bca6c [000bca6c] 08e88352 mov      w8, #0x1f40
+000bca70 [000bca70] e80b00f9 str      x8, [sp, #0x10]
+000bca74 [000bca74] e00313aa mov      x0, x19
+000bca78 [000bca78] e1430091 add      x1, sp, #0x10
+000bca7c [000bca7c] 8dfcff97 bl       #0xbbcb0
+000bca80 [000bca80] 08ee8252 mov      w8, #0x1770
+000bca84 [000bca84] e80b00f9 str      x8, [sp, #0x10]
+000bca88 [000bca88] e00313aa mov      x0, x19
+000bca8c [000bca8c] e1430091 add      x1, sp, #0x10
+000bca90 [000bca90] 88fcff97 bl       #0xbbcb0
+000bca94 [000bca94] 08008052 mov      w8, #0
+000bca98 [000bca98] e80b00f9 str      x8, [sp, #0x10]
+000bca9c [000bca9c] e00313aa mov      x0, x19
+000bcaa0 [000bcaa0] e1430091 add      x1, sp, #0x10
+000bcaa4 [000bcaa4] 83fcff97 bl       #0xbbcb0
+000bcaa8 [000bcaa8] 08209c52 mov      w8, #0xe100
+000bcaac [000bcaac] a8bea072 movk     w8, #0x5f5, lsl #16
+000bcab0 [000bcab0] e80b00f9 str      x8, [sp, #0x10]
+000bcab4 [000bcab4] e00313aa mov      x0, x19
+000bcab8 [000bcab8] e1430091 add      x1, sp, #0x10
+000bcabc [000bcabc] 7dfcff97 bl       #0xbbcb0
+000bcac0 [000bcac0] 08209c52 mov      w8, #0xe100
+000bcac4 [000bcac4] a8bea072 movk     w8, #0x5f5, lsl #16
+000bcac8 [000bcac8] e80b00f9 str      x8, [sp, #0x10]
+000bcacc [000bcacc] e00313aa mov      x0, x19
+000bcad0 [000bcad0] e1430091 add      x1, sp, #0x10
+000bcad4 [000bcad4] 77fcff97 bl       #0xbbcb0
+000bcad8 [000bcad8] f37bc2a8 ldp      x19, x30, [sp], #0x20
+000bcadc [000bcadc] c0035fd6 ret      

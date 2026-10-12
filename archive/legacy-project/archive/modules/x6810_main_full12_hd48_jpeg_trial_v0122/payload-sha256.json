@@ -1,0 +1,7 @@
+{
+  "system/vendor/lib64/libmtkcam_metastore.so": "bafeda846d6d6b81361487a6fa265ee4c70d6b085ce5520d0bd727b077d55d68",
+  "system/vendor/lib64/libmtkcam_pipelinepolicy.so": "d3bfa9aab5d43af352a3bf717ff4b399cad6744ccc2c548ef8ae4650f3635ad2",
+  "system/vendor/lib64/libcam.hal3a.v3.so": "0669ac8e0f329e941ead3098a3ea0828597f8ce68c40a6ec7bef4607d6bbbecd",
+  "system/bin/cameraserver": "2f361a730064a2e8ccab8a3cd7fce8854f30dfffa141e7888f0f3b91b8aa867c",
+  "system/vendor/lib64/libmtkcam_device3_hal.so": "5044cc95b014182d1639539db49e0a2418a2d4ff1e9e25c093cadd8d456911c8"
+}

@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW - experimental HI1631Q binned normalization
+version=0.7.0-binned-normalization-experimental
+versionCode=7
+author=SRE-0
+description=Experimental front 2320x1744 RAW with guarded size normalization. Removes v0.6 request hook. Rear patches preserved. Hardware validation pending.

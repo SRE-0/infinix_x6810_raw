@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 RAW 0.11.0-raw-buffer-fix
+version=0.11.0-raw-buffer-fix
+versionCode=11
+author=SRE-0
+description=RAW16 HAL buffer floor 6: fixes BSG preview lag at native RAW resolutions. Preserves v0.10 front streams and reprocessing.

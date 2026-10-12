@@ -1,0 +1,200 @@
+{
+  "cameraserver": {
+    "input_sha256": "0e61fed272068a7855e236f9fb23d3e07e46bc1ba5588f92398c1a789e457f0c",
+    "output_sha256": "2f361a730064a2e8ccab8a3cd7fce8854f30dfffa141e7888f0f3b91b8aa867c",
+    "cave_start": "0x37aa10",
+    "cave_end": "0x37ab94",
+    "blocks": {
+      "original_set_torch": {
+        "address": "0x37aa10",
+        "size": 8,
+        "source": "sub sp,sp,#0x100; b 0x14ee38"
+      },
+      "ordinary_torch_reset": {
+        "address": "0x37aa18",
+        "size": 96,
+        "source": "\n        stp x19,x30,[sp,#-32]!\n        str x20,[sp,#16]\n        mov x19,x0\n        mov w20,w1\n        cmp w1,#1\n        b.ne call_original\n        ldr w8,[x19,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne call_original\n        mov w1,#0x107\n    call_original:\n        bl 3648016\n        cbnz w0,done\n        cmp w20,#1\n        b.hi done\n        ldr w8,[x19,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne done\n        mov w8,#7\n        str w8,[x19,#0xb8]\n    done:\n        ldr x20,[sp,#16]\n        ldp x19,x30,[sp],#32\n        ret\n    "
+      },
+      "strength_setter": {
+        "address": "0x37aa78",
+        "size": 88,
+        "source": "\n        ldr w8,[x0,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne unsupported\n        sub w8,w1,#1\n        cmp w8,#8\n        b.hi invalid\n        stp x19,x30,[sp,#-32]!\n        str x20,[sp,#16]\n        mov x19,x0\n        mov w20,w1\n        add w1,w1,#0x100\n        bl 3648016\n        cbnz w0,done\n        str w20,[x19,#0xb8]\n    done:\n        ldr x20,[sp,#16]\n        ldp x19,x30,[sp],#32\n        ret\n    unsupported: mov w0,#-38; ret\n    invalid: mov w0,#-22; ret\n    "
+      },
+      "strength_getter": {
+        "address": "0x37aad0",
+        "size": 68,
+        "source": "\n        ldr w8,[x0,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne unsupported\n        cbz x1,invalid\n        ldr w8,[x0,#0xb8]\n        sub w9,w8,#1\n        cmp w9,#8\n        mov w9,#7\n        csel w8,w8,w9,ls\n        str w8,[x1]\n        mov w0,#0\n        ret\n    unsupported: mov w0,#-38; ret\n    invalid: mov w0,#-22; ret\n    "
+      },
+      "strength_characteristics": {
+        "address": "0x37ab14",
+        "size": 128,
+        "source": "\n        cbnz w21,done\n        ldr w8,[x19,#0x20]\n        mov w9,#0x3002\n        cmp w8,w9\n        b.ne done\n        mov w8,#9\n        str w8,[sp,#0xc]\n        add x0,x19,#0x130\n        mov w1,#2\n        movk w1,#5,lsl #16\n        add x2,sp,#0xc\n        mov w3,#1\n        bl 0x377030\n        mov w21,w0\n        cbnz w0,done\n        mov w8,#7\n        str w8,[sp,#0xc]\n        add x0,x19,#0x130\n        mov w1,#3\n        movk w1,#5,lsl #16\n        add x2,sp,#0xc\n        mov w3,#1\n        bl 0x377030\n        mov w21,w0\n        cbnz w0,done\n        mov w8,#7\n        str w8,[x19,#0xb8]\n        str w8,[x19,#0xbc]\n        mov w8,#9\n        str w8,[x19,#0xc0]\n    done:\n        mov w0,w21\n        b 0x13f2a8\n    "
+      }
+    },
+    "changes": [
+      {
+        "offset": "0x37aa10",
+        "old": "0000000000000000",
+        "new": "ff0304d10951f717"
+      },
+      {
+        "offset": "0x37aa18",
+        "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "f37bbea9f40b00f9f30300aaf403012a3f040071c1000054682240b9490086521f01096b41000054e1208052f3ffff97200100359f060071e8000054682240b9490086521f01096b61000054e800805268ba00b9f40b40f9f37bc2a8c0035fd6"
+      },
+      {
+        "offset": "0x14ee34",
+        "old": "ff0304d1",
+        "new": "f9ae0814"
+      },
+      {
+        "offset": "0x37aa78",
+        "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "082040b9490086521f01096be1010054280400511f210071c8010054f37bbea9f40b00f9f30300aaf403012a21000411daffff974000003574ba00b9f40b40f9f37bc2a8c0035fd6a0048012c0035fd6a0028012c0035fd6"
+      },
+      {
+        "offset": "0x37aad0",
+        "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "082040b9490086521f01096b41010054610100b408b840b9090500513f210071e90080520891891a280000b900008052c0035fd6a0048012c0035fd6a0028012c0035fd6"
+      },
+      {
+        "offset": "0x14f2ec",
+        "old": "fd7bbfa9",
+        "new": "e3ad0814"
+      },
+      {
+        "offset": "0x14f31c",
+        "old": "fd7bbfa9",
+        "new": "edad0814"
+      },
+      {
+        "offset": "0x14f208",
+        "old": "61020012",
+        "new": "e103132a"
+      },
+      {
+        "offset": "0x37ab14",
+        "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "d5030035682240b9490086521f01096b4103005428018052e80f00b960c2049141008052a100a072e2330091230080523bf1ff97f503002a00020035e8008052e80f00b960c2049161008052a100a072e23300912300805231f1ff97f503002ac0000035e800805268ba00b968be00b92801805268c200b9e003152ac611f717"
+      },
+      {
+        "offset": "0x13f2a4",
+        "old": "e003152a",
+        "new": "1cee0814"
+      },
+      {
+        "offset": "0x108",
+        "old": "102a2c0000000000",
+        "new": "942b2c0000000000"
+      },
+      {
+        "offset": "0x110",
+        "old": "102a2c0000000000",
+        "new": "942b2c0000000000"
+      }
+    ],
+    "hardware_validated": false
+  },
+  "libmtkcam_device3_hal.so": {
+    "input_sha256": "0333ea749a9b15eb9ecf21215a2ebea11c5d3fbff247acd7ec93022256d544b1",
+    "output_sha256": "5044cc95b014182d1639539db49e0a2418a2d4ff1e9e25c093cadd8d456911c8",
+    "cave_start": "0x38790",
+    "cave_end": "0x38924",
+    "blocks": {
+      "original_set_torch": {
+        "address": "0x38790",
+        "size": 28,
+        "source": "\n        ldp x8,x9,[x0,#0x10]\n        mov w2,w1\n        ldr x10,[x8]\n        mov x0,x8\n        mov x1,x9\n        ldr x3,[x10,#0x58]\n        br x3\n    "
+      },
+      "encoded_torch": {
+        "address": "0x387ac",
+        "size": 375,
+        "source": "\n        sub w8,w1,#0x101\n        cmp w8,#8\n        b.ls encoded\n        b 231312\n    encoded:\n        stp x29,x30,[sp,#-80]!\n        stp x19,x20,[sp,#16]\n        stp x21,x22,[sp,#32]\n        stp x23,x24,[sp,#48]\n        mov x29,sp\n        mov x19,x0\n        add w20,w8,#1\n        adr x0,library\n        mov w1,#2\n        bl 0x37c90\n        mov x21,x0\n        cbz x0,nohandle\n        adr x1,getter\n        bl 0x37ca0\n        cbz x0,nosymbol\n        mov x24,x0\n        mov x0,x21\n        adr x1,control\n        bl 0x37ca0\n        cbz x0,nosymbol\n        mov x23,x0\n        mov w0,#1\n        blr x24\n        mov x22,x0\n        cbz x0,nosymbol\n        mov w1,#0x6810\n        mov w2,w20\n        mov x3,xzr\n        blr x23\n        mov w24,w0\n        cbnz w0,close\n        mov x0,x19\n        mov w1,#1\n        bl 231312\n        mov w24,w0\n        cbnz w0,clear\n        mov x0,x22\n        mov w1,#0x6811\n        mov w2,w20\n        mov x3,xzr\n        blr x23\n        mov w24,w0\n        cbz w0,clear\n        mov x0,x19\n        mov w1,#0\n        bl 231312\n    clear:\n        mov x0,x22\n        mov w1,#0x6810\n        mov x2,xzr\n        mov x3,xzr\n        blr x23\n        b close\n    nosymbol:\n        mov w24,#-38\n    close:\n        mov x0,x21\n        bl 0x37cc0\n        mov w0,w24\n        b done\n    nohandle:\n        mov w0,#-38\n    done:\n        ldp x23,x24,[sp,#48]\n        ldp x21,x22,[sp,#32]\n        ldp x19,x20,[sp,#16]\n        ldp x29,x30,[sp],#80\n        ret\n    library: .byte 108,105,98,99,97,109,46,104,97,108,51,97,46,118,51,46,115,111,0\n    getter: .byte 95,90,78,56,70,108,97,115,104,72,97,108,49,49,103,101,116,73,110,115,116,97,110,99,101,69,105,0\n    control: .byte 95,90,78,56,70,108,97,115,104,72,97,108,49,54,115,101,110,100,67,117,115,116,111,109,51,65,67,116,114,108,69,78,54,78,83,51,65,118,51,49,53,69,67,117,115,116,111,109,51,65,67,116,114,108,95,84,69,108,108,0\n    "
+      }
+    },
+    "changes": [
+      {
+        "offset": "0x38790",
+        "old": "00000000000000000000000000000000000000000000000000000000",
+        "new": "082441a9e203012a0a0140f9e00308aae10309aa432d40f960001fd6"
+      },
+      {
+        "offset": "0x387ac",
+        "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "280404511f21007149000054f6ffff17fd7bbba9f35301a9f55b02a9f76303a9fd030091f30300aa1405001100070010410080522cfdff97f50300aac00500b4e10600702cfdff97c00400b4f80300aae00315aa2107007027fdff97200400b4f70300aa2000805200033fd6f60300aa800300b401028d52e203142ae3031faae0023fd6f803002ae0020035e00313aa21008052d4ffff97f803002a60010035e00316aa21028d52e203142ae3031faae0023fd6f803002a80000034e00313aa01008052c8ffff97e00316aa01028d52e2031faae3031faae0023fd602000014b8048012e00315aa0bfdff97e003182a02000014a0048012f76343a9f55b42a9f35341a9fd7bc5a8c0035fd66c696263616d2e68616c33612e76332e736f005f5a4e38466c61736848616c3131676574496e7374616e63654569005f5a4e38466c61736848616c313673656e64437573746f6d33414374726c454e364e5333417633313545437573746f6d33414374726c5f54456c6c00"
+      },
+      {
+        "offset": "0x194d0",
+        "old": "082441a9",
+        "new": "b77c0014"
+      },
+      {
+        "offset": "0xd0",
+        "old": "9017020000000000",
+        "new": "2419020000000000"
+      },
+      {
+        "offset": "0xd8",
+        "old": "9017020000000000",
+        "new": "2419020000000000"
+      }
+    ],
+    "hardware_validated": false
+  },
+  "libcam.hal3a.v3.so": {
+    "input_sha256": "4d5a62e26aa736cc9b7632ba6b9ee6f63904f5d248ec3bfeece87fe80dcd15d2",
+    "output_sha256": "0669ac8e0f329e941ead3098a3ea0828597f8ce68c40a6ec7bef4607d6bbbecd",
+    "cave_start": "0x2d7a70",
+    "cave_end": "0x2d7b48",
+    "blocks": {
+      "torch_before_on": {
+        "address": "0x2d7a70",
+        "size": 60,
+        "source": "\n        ldr w8,[x0,#0x30]\n        cmp w8,#1\n        b.ne original\n        ldr w8,[x0,#0xbc]\n        cmp w8,#1\n        b.ne original\n        cbnz w2,original\n        adrp x9, 3170304; add x9,x9,#3200\n        ldr w8,[x9]\n        sub w8,w8,#1\n        cmp w8,#8\n        b.hi original\n        bfi x1,x8,#0,#32\n    original:\n        b 0x2d79e0\n    "
+      },
+      "custom_strength_context": {
+        "address": "0x2d7aac",
+        "size": 156,
+        "source": "\n        mov w8,#0x6810\n        cmp w1,w8\n        b.eq context\n        add w8,w8,#1\n        cmp w1,w8\n        b.eq apply\n        stp x29,x30,[sp,#-0x20]!\n        b 0x229eb4\n    context:\n        ldr w8,[x0,#0x30]\n        cmp w8,#1\n        b.ne unsupported\n        cmp x2,#9\n        b.hi invalid\n        adrp x9, 3170304; add x9,x9,#3200\n        str w2,[x9]\n        mov w0,#0\n        ret\n    apply:\n        ldr w8,[x0,#0x30]\n        cmp w8,#1\n        b.ne unsupported\n        sub x8,x2,#1\n        cmp x8,#8\n        b.hi invalid\n        ldr w9,[x0,#0xbc]\n        cmp w9,#1\n        b.ne unavailable\n        ldr x0,[x0,#0x2a8]\n        cbz x0,unavailable\n        ldr x9,[x0]\n        ldr x9,[x9,#0x38]\n        mov w1,w8\n        br x9\n    invalid: mov w0,#-22; ret\n    unsupported: mov w0,#-38; ret\n    unavailable: mov w0,#-19; ret\n    "
+      }
+    },
+    "changes": [
+      {
+        "offset": "0x148",
+        "old": "2036020000000000",
+        "new": "2836020000000000"
+      },
+      {
+        "offset": "0x2d7a70",
+        "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "083040b91f0500718101005408bc40b91f0500712101005402010035690100f029013291280140b9080500511f21007148000054017d40b3ceffff17"
+      },
+      {
+        "offset": "0x229140",
+        "old": "28ba0214",
+        "new": "4cba0214"
+      },
+      {
+        "offset": "0x2d7aac",
+        "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "new": "08028d523f00086bc0000054080500113f00086ba0010054fd7bbea9fb48fd17083040b91f050071210300545f2400f1a8020054690100f029013291220100b900008052c0035fd6083040b91f050071e1010054480400d11f2100f14801005409bc40b93f05007161010054005441f9200100b4090040f9291d40f9e103082a20011fd6a0028012c0035fd6a0048012c0035fd640028012c0035fd6"
+      },
+      {
+        "offset": "0x229eb0",
+        "old": "fd7bbea9",
+        "new": "ffb60214"
+      },
+      {
+        "offset": "0xd0",
+        "old": "6c5a1e0000000000",
+        "new": "485b1e0000000000"
+      },
+      {
+        "offset": "0xd8",
+        "old": "6c5a1e0000000000",
+        "new": "485b1e0000000000"
+      }
+    ],
+    "hardware_validated": false
+  }
+}

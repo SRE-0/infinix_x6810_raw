@@ -1,0 +1,15 @@
+000bc800 [000bc800] f37bbea9 stp      x19, x30, [sp, #-0x20]!
+000bc804 [000bc804] f30300aa mov      x19, x0
+000bc808 [000bc808] f2fcff97 bl       #0xbbbd0
+000bc80c [000bc80c] 88008052 mov      w8, #4
+000bc810 [000bc810] e8430039 strb     w8, [sp, #0x10]
+000bc814 [000bc814] e00313aa mov      x0, x19
+000bc818 [000bc818] e1430091 add      x1, sp, #0x10
+000bc81c [000bc81c] edfcff97 bl       #0xbbbd0
+000bc820 [000bc820] e8008052 mov      w8, #7
+000bc824 [000bc824] e8430039 strb     w8, [sp, #0x10]
+000bc828 [000bc828] e00313aa mov      x0, x19
+000bc82c [000bc82c] e1430091 add      x1, sp, #0x10
+000bc830 [000bc830] e8fcff97 bl       #0xbbbd0
+000bc834 [000bc834] f37bc2a8 ldp      x19, x30, [sp], #0x20
+000bc838 [000bc838] c0035fd6 ret      

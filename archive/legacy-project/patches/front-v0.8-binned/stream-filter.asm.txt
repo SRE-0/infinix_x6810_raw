@@ -1,0 +1,19 @@
+000bc7b0 [000bc7b0] ab1240b9 ldr      w11, [x21, #0x10]
+000bc7b4 [000bc7b4] 7f050071 cmp      w11, #1
+000bc7b8 [000bc7b8] e1010054 b.ne     #0xbc7f4
+000bc7bc [000bc7bc] 09448252 mov      w9, #0x1220
+000bc7c0 [000bc7c0] 9f0309eb cmp      x28, x9
+000bc7c4 [000bc7c4] 81010054 b.ne     #0xbc7f4
+000bc7c8 [000bc7c8] eb2340f9 ldr      x11, [sp, #0x40]
+000bc7cc [000bc7cc] 09b48152 mov      w9, #0xda0
+000bc7d0 [000bc7d0] 7f0109eb cmp      x11, x9
+000bc7d4 [000bc7d4] 01010054 b.ne     #0xbc7f4
+000bc7d8 [000bc7d8] 09228152 mov      w9, #0x910
+000bc7dc [000bc7dc] ff0009eb cmp      x7, x9
+000bc7e0 [000bc7e0] 6c28e154 b.gt     #0x7ecec
+000bc7e4 [000bc7e4] 4b0940f9 ldr      x11, [x10, #0x10]
+000bc7e8 [000bc7e8] 09da8052 mov      w9, #0x6d0
+000bc7ec [000bc7ec] 7f0109eb cmp      x11, x9
+000bc7f0 [000bc7f0] ec27e154 b.gt     #0x7ecec
+000bc7f4 [000bc7f4] 0827e134 cbz      w8, #0x7ecd4
+000bc7f8 [000bc7f8] b608ff17 b        #0x7ead0

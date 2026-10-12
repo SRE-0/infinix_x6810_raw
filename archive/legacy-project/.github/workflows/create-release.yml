@@ -1,0 +1,75 @@
+name: Create X6810 release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Unique release tag, e.g. x6810-camera-2026.10.12'
+        required: true
+        type: string
+      raw_version:
+        description: 'Complete RAW module version to include'
+        required: true
+        default: v001
+        type: choice
+        options:
+          - v001
+          - v000
+
+permissions:
+  contents: read
+
+concurrency:
+  group: x6810-release-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.actor == 'sre-0' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Verify the user who started or re-ran the workflow
+        shell: bash
+        env:
+          TRIGGERING_ACTOR: ${{ github.triggering_actor }}
+        run: |
+          set -euo pipefail
+          if [[ "$TRIGGERING_ACTOR" != "sre-0" ]]; then
+            echo "Only sre-0 can start or re-run this release workflow." >&2
+            exit 1
+          fi
+
+      - name: Check out repository and Git LFS payloads
+        uses: actions/checkout@v7
+        with:
+          lfs: true
+          persist-credentials: false
+
+      - name: Build release assets
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          RAW_VERSION: ${{ inputs.raw_version }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$RELEASE_TAG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$ ]]; then
+            echo "Invalid release tag: use letters, numbers, dot, underscore, or hyphen." >&2
+            exit 1
+          fi
+          python3 scripts/package_github_release.py \
+            --raw-version "$RAW_VERSION" \
+            --output-dir dist/github-release
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          gh release create "$RELEASE_TAG" dist/github-release/* \
+            --title "$RELEASE_TAG" \
+            --notes-file .github/RELEASE_NOTES.md \
+            --target "$GITHUB_SHA"

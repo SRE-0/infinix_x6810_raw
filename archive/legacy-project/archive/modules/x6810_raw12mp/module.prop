@@ -1,0 +1,6 @@
+id=x6810_raw12mp
+name=X6810 S5KGM1ST RAW16 12MP - experimental
+version=0.1.0
+versionCode=1
+author=SRE-0
+description=Adds S5KGM1ST RAW capability and RAW16 4000x3000 to the supplied X6810 vendor library. Capture validation pending. No auxiliary or 48MP RAW claim.

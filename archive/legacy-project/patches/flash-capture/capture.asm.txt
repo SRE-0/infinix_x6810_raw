@@ -1,0 +1,61 @@
+
+    ldr w8,[x0,#0x30]
+    cmp w8,#1
+    b.ne original
+    sub w8,w2,#1
+    cmp w8,#299
+    b.hi original
+    sub w8,w1,#9
+    cmp w8,#20
+    b.hi original
+    stp x0,x1,[sp,#-48]!
+    stp x2,x3,[sp,#16]
+    str x30,[sp,#32]
+    adr x0,property_name
+    mov w1,wzr
+    bl 0x2cebd0
+    mov w8,w0
+    ldp x0,x1,[sp]
+    ldp x2,x3,[sp,#16]
+    ldr x30,[sp,#32]
+    add sp,sp,#48
+    sub w9,w8,#9
+    cmp w9,#20
+    b.hi original
+    cmp w8,w1
+    b.hi original
+    bfi x1,x8,#0,#32
+    original:
+    sub sp,sp,#0x70
+    b 2265412
+    property_name:
+    .byte 118,101,110,100,111,114,46,100,101,98,117,103,46,120,54,56,49,48,46,102,108,97,115,104,99,97,112,0
+    
+002d79e0 [002d79e0] 083040b9 ldr      w8, [x0, #0x30]
+002d79e4 [002d79e4] 1f050071 cmp      w8, #1
+002d79e8 [002d79e8] 01030054 b.ne     #0x2d7a48
+002d79ec [002d79ec] 48040051 sub      w8, w2, #1
+002d79f0 [002d79f0] 1fad0471 cmp      w8, #0x12b
+002d79f4 [002d79f4] a8020054 b.hi     #0x2d7a48
+002d79f8 [002d79f8] 28240051 sub      w8, w1, #9
+002d79fc [002d79fc] 1f510071 cmp      w8, #0x14
+002d7a00 [002d7a00] 48020054 b.hi     #0x2d7a48
+002d7a04 [002d7a04] e007bda9 stp      x0, x1, [sp, #-0x30]!
+002d7a08 [002d7a08] e20f01a9 stp      x2, x3, [sp, #0x10]
+002d7a0c [002d7a0c] fe1300f9 str      x30, [sp, #0x20]
+002d7a10 [002d7a10] 00020010 adr      x0, #0x2d7a50
+002d7a14 [002d7a14] e1031f2a mov      w1, wzr
+002d7a18 [002d7a18] 6edcff97 bl       #0x2cebd0
+002d7a1c [002d7a1c] e803002a mov      w8, w0
+002d7a20 [002d7a20] e00740a9 ldp      x0, x1, [sp]
+002d7a24 [002d7a24] e20f41a9 ldp      x2, x3, [sp, #0x10]
+002d7a28 [002d7a28] fe1340f9 ldr      x30, [sp, #0x20]
+002d7a2c [002d7a2c] ffc30091 add      sp, sp, #0x30
+002d7a30 [002d7a30] 09250051 sub      w9, w8, #9
+002d7a34 [002d7a34] 3f510071 cmp      w9, #0x14
+002d7a38 [002d7a38] 88000054 b.hi     #0x2d7a48
+002d7a3c [002d7a3c] 1f01016b cmp      w8, w1
+002d7a40 [002d7a40] 48000054 b.hi     #0x2d7a48
+002d7a44 [002d7a44] 017d40b3 bfxil    x1, x8, #0, #0x20
+002d7a48 [002d7a48] ffc301d1 sub      sp, sp, #0x70
+002d7a4c [002d7a4c] be45fd17 b        #0x229144
