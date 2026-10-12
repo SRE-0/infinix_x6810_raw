@@ -37,6 +37,6 @@ offline verifican política y bytes; no sustituyen esas mediciones.
 La estructura histórica conserva rutas relativas e imports. Los antiguos scripts
 de releases combinados y enlaces a GCam son referencias retiradas; usa los dos
 comandos mantenidos y [el repositorio GCam](https://github.com/SRE-0/infinix_x6810_gcam_port).
-No se ejecutó ARTEMIS ni se conectó ADB al dispositivo, conforme a la instrucción
+No se ejecutaron tareas móviles ARTEMIS ni se conectó ADB al dispositivo, conforme a la instrucción
 del usuario. Datos locales de `research/`, `.local-private/` y `dist/` no entran
 en el inventario ni en la publicación.
