@@ -28,3 +28,5 @@ Validation reconstructs `old/new` manifest deltas, reversing preserved outputs w
 RAW provenance: `archive/legacy-project/archive/modules/x6810_raw_v012` plus `archive/legacy-project/patches/v0122_x6810_raw_hd48_12mp/manifest.json`. HAL3A and policy retain the flash-free RAW/OIS bytes. Flash provenance: `archive/legacy-project/modules/v001_x6810_GL_raw_hd48_12mp_torch_single_flash_apis_changes`.
 
 A new firmware profile needs original ELF files, verified deltas and capture/preview/OIS/flash evidence. An SDK number alone does not authorize an older cameraserver. [Licensing and redistribution review](LEGAL.md).
+
+Installer presentation is derived at build time from `template-module/customize.sh` by `scripts/module_template.py`. Module-specific checks and boot scripts remain owned by their project.

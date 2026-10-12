@@ -1,13 +1,15 @@
-# X6810 RAW/OIS/HD48 and RAW + flash — v1.1.0
+# X6810 RAW/OIS/HD48 and RAW + flash — v1.2.0
 
 [English](README.md) · [Español](docs/es/README.md) · [GCam project](https://github.com/SRE-0/infinix_x6810_gcam_port)
 
 This release provides two systemless camera modules for the Infinix Zero X Neo X6810-GL.
 
+Installer now derives from `template-module`: SRE-0 banner, module metadata, manager detection, numbered checks and closing footer. Existing payloads and admission checks are preserved.
+
 ## Downloads
 
-- `x6810-raw-1.1.0.zip` — RAW16, telephoto OIS and processed JPEG HD48.
-- `x6810-raw-flash-1.1.0.zip` — those camera features plus TORCH/SINGLE flash strength support for the pinned framework profile.
+- `x6810-raw-1.2.0.zip` — RAW16, telephoto OIS and processed JPEG HD48.
+- `x6810-raw-flash-1.2.0.zip` — those camera features plus TORCH/SINGLE flash strength support for the pinned framework profile.
 - `SHA256SUMS.txt` and `releases.json` — verify package integrity and identify each variant.
 
 Install only one variant through APatch, then reboot. Both share module ID `x6810_raw12mp`; install the other variant over it to switch. Read [installation and recovery](https://github.com/SRE-0/infinix_x6810_raw/blob/main/docs/INSTALLATION.md) first, keep a working recovery route, and stop if the installer rejects your firmware.
@@ -43,10 +45,12 @@ Experimental software, provided as-is without warranties to the fullest extent p
 
 Esta versión ofrece dos módulos systemless de cámara para Infinix Zero X Neo X6810-GL.
 
+El instalador deriva de `template-module`: banner SRE-0, metadatos, detecci?n del gestor, pasos numerados y cierre. Se conservan los payloads y controles de compatibilidad.
+
 ## Descargas
 
-- `x6810-raw-1.1.0.zip`: RAW16, OIS del teleobjetivo y JPEG HD48 procesado.
-- `x6810-raw-flash-1.1.0.zip`: esas funciones más intensidad TORCH/SINGLE para el perfil fijado de framework.
+- `x6810-raw-1.2.0.zip`: RAW16, OIS del teleobjetivo y JPEG HD48 procesado.
+- `x6810-raw-flash-1.2.0.zip`: esas funciones más intensidad TORCH/SINGLE para el perfil fijado de framework.
 - `SHA256SUMS.txt` y `releases.json`: comprueba integridad e identifica cada variante.
 
 Instala solo una variante desde APatch y reinicia. Ambas usan el ID `x6810_raw12mp`; instala la otra encima para cambiar. Antes, lee la [guía de instalación y recuperación](https://github.com/SRE-0/infinix_x6810_raw/blob/main/docs/es/INSTALLATION.md), conserva una vía funcional de recuperación y detente si el instalador rechaza tu firmware.

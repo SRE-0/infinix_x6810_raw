@@ -5,11 +5,12 @@ import hashlib
 import json
 from pathlib import Path
 import zipfile
+from module_template import render_installer
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'archive/legacy-project'
 ID = 'x6810_raw12mp'
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 VENDOR = 'system/vendor/lib64/'
 META = VENDOR + 'libmtkcam_metastore.so'
 POLICY = VENDOR + 'libmtkcam_pipelinepolicy.so'
@@ -58,6 +59,7 @@ def accepted_states(flavor: str) -> list[dict[str, str]]:
 def installer(flavor: str, hashes: dict[str, str]) -> str:
     text = '''#!/system/bin/sh
 SKIPUNZIP=0
+print_step 1 5 "Checking device and firmware"
 command -v sha256sum >/dev/null 2>&1 || abort "sha256sum required"
 file_sha() { sha256sum "$1" 2>/dev/null | cut -d ' ' -f 1; }
 DEVICE_OK=0
@@ -78,9 +80,11 @@ case "$SDK" in ''|*[!0-9]*) abort "Invalid Android SDK" ;; esac
     tuples = sorted({':'.join(state[p] for p in paths) for state in accepted_states(flavor)})
     text += 'case "' + ':'.join(f'$S{i}' for i in range(len(paths))) + '" in\n '
     text += '|'.join(tuples) + ') ;;\n *) abort "Unsupported camera binary set; do not bypass hashes" ;;\nesac\n'
+    text += 'print_step 2 5 "Verifying payload checksums"\n'
     for rel, expected in hashes.items():
         text += f'[ "$(file_sha "$MODPATH/{rel}")" = {expected} ] || abort "Payload mismatch: {rel}"\n'
-    text += '''# Reject active and pending overlays, including direct vendor layouts.
+    text += '''print_step 3 5 "Checking conflicting modules"
+# Reject active and pending overlays, including direct vendor layouts.
 for base in /data/adb/modules /data/adb/modules_update; do
  for other in "$base"/*; do
   [ -d "$other" ] || continue
@@ -92,25 +96,28 @@ for base in /data/adb/modules /data/adb/modules_update; do
   done
  done
 done
+print_step 4 5 "Backing up current binaries"
 mkdir -p "$MODPATH/backup" || abort "Cannot create backup"
 '''
     for rel in paths:
         text += f'cp -p {live_path(rel)} "$MODPATH/backup/{Path(rel).name}" || abort "Backup failed"\n'
-    text += '''set_perm_recursive "$MODPATH" 0 0 0755 0644
+    text += '''print_step 5 5 "Setting permissions"
+set_perm_recursive "$MODPATH" 0 0 0755 0644
 set_perm_recursive "$MODPATH/system/vendor" 0 0 0755 0644 u:object_r:vendor_file:s0
 for script in post-fs-data.sh service.sh boot-completed.sh; do set_perm "$MODPATH/$script" 0 0 0755; done
 '''
     if SERVER in hashes:
         text += 'set_perm "$MODPATH/system/bin/cameraserver" 0 2000 0755 u:object_r:cameraserver_exec:s0\n'
     text += f'ui_print "X6810 {flavor} {VERSION}: binary checks passed. Reboot required."\n'
-    return text
+    return render_installer(ROOT, f'X6810 {flavor}', VERSION,
+                            'https://github.com/SRE-0/infinix_x6810_raw', text)
 
 def module_files(flavor: str) -> dict[str, bytes]:
     files = payload(flavor)
     hashes = {p: digest(b) for p, b in files.items()}
     description = ('RAW16, processed JPEG HD48 and telephoto OIS; vendor-only, Android 11+ with known binaries.'
                    if flavor == 'raw' else 'RAW/OIS/HD48 plus TORCH/SINGLE bridge; exact Android 16 GSI framework profile.')
-    files['module.prop'] = (f'id={ID}\nname=X6810 {flavor}\nversion={VERSION}\nversionCode=10100\nauthor=SRE-0\ndescription={description}\n').encode()
+    files['module.prop'] = (f'id={ID}\nname=X6810 {flavor}\nversion={VERSION}\nversionCode=10200\nauthor=SRE-0\ndescription={description}\n').encode()
     files['customize.sh'] = installer(flavor, hashes).encode()
     files['payload-sha256.json'] = (json.dumps(hashes, indent=2)+'\n').encode()
     files['compatibility.json'] = (json.dumps({'flavor': flavor, 'min_sdk': 30 if flavor == 'raw' else 36,
